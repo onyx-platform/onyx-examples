@@ -1,5 +1,7 @@
 # flat-workflow
 
+Demonstrates a linear workflow of :input -> :processing -> :output.
+
 ## Usage
 
 ```text

@@ -1,4 +1,6 @@
-# flat-workflow
+# multi-output-workflow
+
+Demonstrates a workflow that forks its computation to two final outputs.
 
 ## Usage
 

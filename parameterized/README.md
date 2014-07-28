@@ -1,4 +1,6 @@
-# flat-workflow
+# parameterized
+
+Demonstrates injecting parameters into a transformation function using the catalog as point of flexibility.
 
 ## Usage
 

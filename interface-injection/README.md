@@ -1,4 +1,6 @@
-# flat-workflow
+# interface-injection
+
+Demonstrates parameterization using the peer configuration as a site of flexibility.
 
 ## Usage
 
