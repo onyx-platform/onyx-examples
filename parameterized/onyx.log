@@ -1,0 +1,508 @@
+2014-Jul-27 20:25:36 -0700 michaels-mbp-3.home INFO [onyx.logging-configuration] - Starting Logging Configuration
+2014-Jul-27 20:25:36 -0700 michaels-mbp-3.home INFO [onyx.sync.zookeeper] - Starting ZooKeeper
+2014-Jul-27 20:25:37 -0700 michaels-mbp-3.home INFO [onyx.queue.hornetq] - Starting HornetQ connection
+2014-Jul-27 20:25:37 -0700 michaels-mbp-3.home INFO [onyx.coordinator.async] - Starting Coordinator
+2014-Jul-27 20:25:37 -0700 michaels-mbp-3.home INFO [onyx.logging-configuration] - Starting Logging Configuration
+2014-Jul-27 20:25:37 -0700 michaels-mbp-3.home INFO [onyx.sync.zookeeper] - Starting ZooKeeper
+2014-Jul-27 20:25:37 -0700 michaels-mbp-3.home INFO [onyx.queue.hornetq] - Starting HornetQ connection
+2014-Jul-27 20:25:37 -0700 michaels-mbp-3.home INFO [onyx.peer.virtual-peer] - Starting Virtual Peer f1e4654a-7dbc-4052-a67d-b9a34739fbb8
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Starting Task LifeCycle for :input
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 6 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :input? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Stopping Task LifeCycle for :input
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Starting Task LifeCycle for :add
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 6 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :add? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :add? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Stopping Task LifeCycle for :add
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :add? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :add? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :add? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch to 1 outputs
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :add? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Starting Task LifeCycle for :output
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 6 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 6 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 7 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :output? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :output? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Created new tx session
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Stopping Task LifeCycle for :output
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :output? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :output? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read batch of 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Read 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Decompressed 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :output? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Attempted to strip sentinel. 0 segments left
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Requeued sentinel value
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Applied fn to 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Compressed 0 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Wrote batch
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Checked the status node
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home DEBUG [onyx.peer.transform] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Acked 1 segments
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Committed transaction? true
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Closed temporal plugin resources
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Sealing resource for :output? false
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.task-lifecycle] - [f1e4654a-7dbc-4052-a67d-b9a34739fbb8] Completing task
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.peer.virtual-peer] - Stopping Virtual Peer f1e4654a-7dbc-4052-a67d-b9a34739fbb8
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.coordinator.async] - Stopping Coordinator
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.queue.hornetq] - Stopping HornetQ connection
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.sync.zookeeper] - Stopping ZooKeeper
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.queue.hornetq] - Stopping HornetQ connection
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.sync.zookeeper] - Stopping ZooKeeper
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.logging-configuration] - Stopping Logging Configuration
+2014-Jul-27 20:25:38 -0700 michaels-mbp-3.home INFO [onyx.logging-configuration] - Stopping Logging Configuration
