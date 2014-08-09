@@ -125,6 +125,3 @@
 
 (onyx.api/shutdown conn)
 
-(defn -main [& args]
-  (println "Done!"))
-

@@ -1,11 +1,28 @@
-(ns flat-workflow.core
+(ns aspect-orientation.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
+            [dire.core :as dire]
             [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async]
             [onyx.api]))
 
 (defn my-inc [{:keys [n] :as segment}]
   (assoc segment :n (inc n)))
+
+(dire/with-pre-hook! #'my-inc
+  (fn [segment]
+    (println "[Logger] Received segment: " segment)))
+
+(dire/with-post-hook! #'my-inc
+  (fn [result]
+    (println "[Logger] Emitting segment: " result)))
+
+(dire/with-precondition! #'my-inc
+  :evens-only
+  (fn [{:keys [n]}] (even? n)))
+
+(dire/with-handler! #'my-inc
+  {:precondition :evens-only}
+  (fn [e & args] []))
 
 (def workflow {:input {:inc :output}})
 
@@ -33,7 +50,7 @@
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :inc
-    :onyx/fn :flat-workflow.core/my-inc
+    :onyx/fn :aspect-orientation.core/my-inc
     :onyx/type :transformer
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
@@ -84,9 +101,12 @@
 (onyx.api/submit-job conn {:catalog catalog :workflow workflow})
 
 (def results
-  (doall
-   (map (fn [_] (<!! output-chan))
-        (range (count input-segments)))))
+  (loop [x []]
+    (let [segment (<!! output-chan)]
+      (let [stack (conj x segment)]
+        (if-not (= segment :done)
+          (recur stack)
+          stack)))))
 
 (clojure.pprint/pprint results)
 

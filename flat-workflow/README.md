@@ -2,12 +2,6 @@
 
 Demonstrates a linear workflow of :input -> :processing -> :output.
 
-## Usage
-
-```text
-lein run
-```
-
 ## License
 
 Copyright © 2014 Michael Drogalis

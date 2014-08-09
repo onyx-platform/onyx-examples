@@ -2,12 +2,6 @@
 
 Demonstrates a workflow that forks its computation to two final outputs.
 
-## Usage
-
-```text
-lein run
-```
-
 ## License
 
 Copyright © 2014 Michael Drogalis

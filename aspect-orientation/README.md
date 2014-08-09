@@ -1,6 +1,6 @@
-# interface-injection
+# aspect-orientation
 
-Demonstrates parameterization using the peer configuration as a site of flexibility.
+Demonstrates a using Onyx with Dire to achieve aspect oriented functions in a distributed manner.
 
 ## License
 
