@@ -3,6 +3,7 @@
             [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async]
             [onyx.api]))
+
 (defn my-inc [{:keys [n] :as segment}]
   (assoc segment :n (inc n)))
 
