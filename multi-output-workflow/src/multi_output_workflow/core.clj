@@ -5,10 +5,13 @@
             [onyx.api]))
 
 (defn my-inc [{:keys [n] :as segment}]
-  (assoc segment :n (inc n)))
+  (update-in segment [:n] inc))
 
-(def workflow {:input {:inc-1 :output-1
-                       :inc-2 :output-2}})
+(defn my-dec [{:keys [n] :as segment}]
+  (update-in segment [:n] dec))
+
+(def workflow {:input {:inc :output-1
+                       :dec :output-2}})
 
 (def capacity 1000)
 
@@ -38,14 +41,14 @@
     :onyx/batch-size batch-size
     :onyx/doc "Reads segments from a core.async channel"}
 
-   {:onyx/name :inc-1
+   {:onyx/name :inc
     :onyx/fn :multi-output-workflow.core/my-inc
     :onyx/type :transformer
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
-   {:onyx/name :inc-2
-    :onyx/fn :multi-output-workflow.core/my-inc
+   {:onyx/name :dec
+    :onyx/fn :multi-output-workflow.core/my-dec
     :onyx/type :transformer
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
@@ -112,6 +115,11 @@
   (doall
    (map (fn [_] (<!! output-chan-2))
         (range (count input-segments)))))
+
+(println "Original segments:")
+(clojure.pprint/pprint input-segments)
+
+(println)
 
 (println "Output 1:")
 (clojure.pprint/pprint results-1)
