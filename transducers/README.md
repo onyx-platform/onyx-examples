@@ -1,6 +1,6 @@
-# aggregation
+# transducers
 
-Demonstration of grouping and aggregating segments through word count!
+Demonstrates a workflow using transducers. Requires Clojure `1.7.0-alpha2` and onyx `0.4.0-SNAPSHOT`.
 
 ## License
 
