@@ -13,7 +13,7 @@
   :parameterized.core/my-adder
   [_ {:keys [onyx.core/task-map onyx.core/fn-params] :as pipeline}]
   (let [k (:parameterized.core/k task-map)]
-        {:onyx.core/params [k]}))
+    {:onyx.core/params [k]}))
 
 (def capacity 1000)
 
