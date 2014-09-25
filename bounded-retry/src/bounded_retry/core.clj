@@ -33,6 +33,16 @@
 (defmethod l-ext/inject-lifecycle-resources :in
   [_ _] {:core-async/in-chan input-chan})
 
+(defn bounded-write-single-message-to-producers [queue session queue-names segment]
+  (doseq [producer (map (partial extensions/create-producer queue session) queue-names)]
+    (let [context {:onyx.core/results [segment]}
+          compression-context (p-ext/compress-batch context)
+          segment (-> compression-context :onyx.core/compressed first :compressed)]
+      (extensions/produce-message queue producer session segment))
+    (extensions/commit-tx queue session)
+    (extensions/close-resource queue producer))
+  (extensions/close-resource queue session))
+
 (defmethod l-ext/inject-lifecycle-resources :exciting-name
   [_ {:keys [onyx.core/queue onyx.core/ingress-queues onyx.core/task-map] :as context}]
   (let [n (:retry-on-failure/n task-map)
@@ -40,20 +50,10 @@
             (when (< (or (:failures segment) 0) n)
               (let [retry-segment (assoc segment :failures (inc (or (:failures segment) 0)))
                     session (extensions/create-tx-session queue)]
-                (doseq [producer (map (partial extensions/create-producer queue session) ingress-queues)]
-                  (let [compressed (:onyx.core/compressed (p-ext/compress-batch (assoc context :onyx.core/results [retry-segment])))]
-                    (extensions/produce-message queue producer session (:compressed (first compressed))))
-                  (extensions/commit-tx queue session)
-                  (extensions/close-resource queue producer))
+                (bounded-write-single-message-to-producers queue session ingress-queues retry-segment)
                 (extensions/close-resource queue session))))]
     {:produce-f f
      :onyx.core/params [f]}))
-
-(defmethod l-ext/close-lifecycle-resources :exciting-name
-  [_ {:keys [onyx.core/queue] :as context}]
-  (doseq [producer (:retry-producers context)]
-    (extensions/close-resource queue producer))
-  {})
 
 (defmethod l-ext/inject-lifecycle-resources :out
   [_ _] {:core-async/out-chan output-chan})
