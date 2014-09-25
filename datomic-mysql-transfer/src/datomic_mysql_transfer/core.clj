@@ -225,6 +225,9 @@
       (map (partial d/entity db))
       (map (partial into {}))))
 
+
+
+
 (doseq [v-peer v-peers]
   ((:shutdown-fn v-peer)))
 
