@@ -29,6 +29,9 @@
 ;;; The table to read out of
 (def table :people)
 
+;;; The table we'll later write back to
+(def copy-table :people_copy)
+
 ;;; A monotonically increasing integer to partition the table by
 (def id-column :id)
 
@@ -69,7 +72,7 @@
 (jdbc/execute!
  conn-pool
  (vector (jdbc/create-table-ddl
-          :people
+          table
           [:id :int "PRIMARY KEY AUTO_INCREMENT"]
           [:name "VARCHAR(32)"]
           [:age "INTEGER(4)"])))
@@ -89,8 +92,7 @@
 (doseq [person people]
   (jdbc/insert! conn-pool :people person))
 
-
-;;;;;;;; First, some set up work for Datomic ;;;;;;;;;;;;;
+;;;;;;;; Next, some set up work for Datomic ;;;;;;;;;;;;;
 
 ;;; The URI for the Datomic database that we'll write to
 (def db-uri (str "datomic:mem://" (java.util.UUID/randomUUID)))
@@ -121,6 +123,8 @@
 
 @(d/transact datomic-conn schema)
 
+;;;;;;;;;;;; Next, we run the Onyx job to transfer the data ;;;;;;;;;;;;;;
+
 ;;; Create an ID to connect the Coordinator with its peers
 (def id (str (java.util.UUID/randomUUID)))
 
@@ -141,6 +145,8 @@
    :zookeeper/address "127.0.0.1:2185"
    :onyx/id id})
 
+;;; Partition the MySQL table by ID column, parallel read the rows,
+;;; do a semantic transformation, write to Datomic.
 (def workflow {:partition-keys {:read-rows {:prepare-datoms :write-to-datomic}}})
 
 (def catalog
@@ -217,7 +223,11 @@
 ;;; Take the value of the database
 (def db (d/db datomic-conn))
 
+;; And take the T value for later
+(def t (d/next-t db))
+
 ;;; All the names and ages
+(prn "Datomic...")
 (clojure.pprint/pprint 
  (->> db
       (d/q '[:find ?e :where [?e :user/name]])
@@ -225,11 +235,106 @@
       (map (partial d/entity db))
       (map (partial into {}))))
 
+(prn)
 
+;;;;; Now we'll go in the reverse direction. Read from Datomic, write to MySQL ;;;;;;
 
+;;; Create the table we'll write back to.
+(jdbc/execute!
+ conn-pool
+ (vector (jdbc/create-table-ddl
+          copy-table
+          [:id :int "PRIMARY KEY AUTO_INCREMENT"]
+          [:name "VARCHAR(32)"]
+          [:age "INTEGER(4)"])))
 
+;;; Partition the datoms index, read datoms in parallel,
+;;; semantically transform from datoms to rows, write to MySQL.
+(def workflow {:partition-datoms {:read-datoms {:prepare-rows :write-to-mysql}}})
+
+(def catalog
+  [{:onyx/name :partition-datoms
+    :onyx/ident :datomic/partition-datoms
+    :onyx/type :input
+    :onyx/medium :datomic
+    :onyx/consumption :sequential
+    :onyx/bootstrap? true
+    :datomic/uri db-uri
+    :datomic/t t
+    :datomic/partition :com.mdrogalis/people
+    :datomic/datoms-per-segment 1000
+    :onyx/batch-size batch-size
+    :onyx/doc "Creates ranges over an :eavt index to parellelize loading datoms"}
+
+   {:onyx/name :read-datoms
+    :onyx/ident :datomic/read-datoms
+    :onyx/fn :onyx.plugin.datomic/read-datoms
+    :onyx/type :transformer
+    :onyx/consumption :concurrent
+    :datomic/uri db-uri
+    :datomic/t t
+    :onyx/batch-size batch-size
+    :onyx/doc "Reads and enqueues a range of the :eavt datom index"}
+
+   {:onyx/name :prepare-rows
+    :onyx/fn :datomic-mysql-transfer.core/prepare-rows
+    :onyx/type :transformer
+    :onyx/consumption :concurrent
+    :datomic/uri db-uri
+    :datomic/t t
+    :onyx/batch-size batch-size
+    :onyx/doc "Semantically transform the Datomic datoms to SQL rows"}
+
+   {:onyx/name :write-to-mysql
+    :onyx/ident :sql/write-rows
+    :onyx/type :output
+    :onyx/medium :sql
+    :onyx/consumption :concurrent
+    :sql/classname classname
+    :sql/subprotocol subprotocol
+    :sql/subname subname
+    :sql/user user
+    :sql/password password
+    :sql/table copy-table
+    :onyx/batch-size 1000
+    :onyx/doc "Writes segments from the :rows keys to the SQL database"}])
+
+;;; We're going to need to get a hold of the database for queries down
+;;; below. Inject it in as a parameter to the prepare-rows function.
+(defmethod l-ext/inject-lifecycle-resources :prepare-rows
+  [_ {:keys [onyx.core/task-map onyx.core/fn-params] :as pipeline}]
+  (let [conn (d/connect (:datomic/uri task-map))
+        db (d/as-of (d/db conn) (:datomic/t task-map))]
+    {:onyx.core/params [db]}))
+
+;;; Semantic preparation from datoms to rows for MySQL.
+;;; We'll have to query Datomic after we get each age, because
+;;; we can only see a stream of datoms. That stream doesn't necessarily
+;;; need to contain the corresponding name.
+(defn prepare-rows [db {:keys [datoms]}]
+  (let [names (map #(nth % 2) (filter (fn [[e a v t op]] (= a :user/name)) datoms))
+        ages (map
+              (fn [name]
+                (->> name
+                     (d/q '[:find ?age :in $ ?name :where
+                            [?e :user/name ?name]
+                            [?e :user/age ?age]] db)
+                     (ffirst)))
+              names)]
+    {:rows (map (fn [name age] {:name name :age age}) names ages)}))
+
+;;; Submit the next job
+(def job-id (onyx.api/submit-job conn {:catalog catalog :workflow workflow}))
+
+;;; Block until the job is done, then check MySQL
+@(onyx.api/await-job-completion conn (str job-id))
+
+;;; Aaaaaand stop!
 (doseq [v-peer v-peers]
   ((:shutdown-fn v-peer)))
 
 (onyx.api/shutdown conn)
+
+(prn "MySQL...")
+(clojure.pprint/pprint (jdbc/query conn-pool [(format "SELECT name, age FROM %s" (name copy-table))]))
 
