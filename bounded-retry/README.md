@@ -1,4 +1,4 @@
-# error-retry
+# bounded-retry
 
 An example of retrying a failing segment a bounded number of times.
 
