@@ -32,23 +32,20 @@
 (defmethod l-ext/inject-lifecycle-resources :in
   [_ _] {:core-async/in-chan input-chan})
 
-(defn write-single-message-to-producers [queue session queue-names segment]
-  (doseq [producer (map (partial extensions/create-producer queue session) queue-names)]
-    (let [context {:onyx.core/results [segment]}
-          compression-context (p-ext/compress-batch context)
-          segment (-> compression-context :onyx.core/compressed first :compressed)]
-      (extensions/produce-message queue producer session segment))
-    (extensions/commit-tx queue session)
-    (extensions/close-resource queue producer))
-  (extensions/close-resource queue session))
-
-(defmethod l-ext/inject-lifecycle-resources :exciting-name
+(defmethod l-ext/inject-temporal-resources :exciting-name
   [_ {:keys [onyx.core/queue onyx.core/ingress-queues] :as context}]
-  (let [f (fn [segment]
-            (let [session (extensions/create-tx-session queue)]
-              (write-single-message-to-producers queue session ingress-queues segment)
-              (extensions/close-resource queue session)))]
-    {:produce-f f
+  (let [session (extensions/create-tx-session queue)
+        producers (doall (map (partial extensions/create-producer queue session) ingress-queues))
+        f (fn [segment]
+            (doseq [p producers]
+              (let [context {:onyx.core/results [segment]}
+                    compression-context (p-ext/compress-batch context)
+                    segment (-> compression-context :onyx.core/compressed first :compressed)]
+                (extensions/produce-message queue p session segment)
+                (extensions/close-resource queue p))))]
+    {:onyx.core/session session
+     :error-producers producers
+     :produce-f f
      :onyx.core/params [f]}))
 
 (defmethod l-ext/inject-lifecycle-resources :out
