@@ -33,27 +33,30 @@
 (defmethod l-ext/inject-lifecycle-resources :in
   [_ _] {:core-async/in-chan input-chan})
 
-(defn bounded-write-single-message-to-producers [queue session queue-names segment]
-  (doseq [producer (map (partial extensions/create-producer queue session) queue-names)]
-    (let [context {:onyx.core/results [segment]}
-          compression-context (p-ext/compress-batch context)
-          segment (-> compression-context :onyx.core/compressed first :compressed)]
-      (extensions/produce-message queue producer session segment))
-    (extensions/commit-tx queue session)
-    (extensions/close-resource queue producer))
-  (extensions/close-resource queue session))
-
-(defmethod l-ext/inject-lifecycle-resources :exciting-name
+(defmethod l-ext/inject-temporal-resources :exciting-name
   [_ {:keys [onyx.core/queue onyx.core/ingress-queues onyx.core/task-map] :as context}]
-  (let [n (:retry-on-failure/n task-map)
+  (let [session (extensions/create-tx-session queue)
+        producers (doall (map (partial extensions/create-producer queue session) ingress-queues))
+        n (:retry-on-failure/n task-map)
         f (fn [segment]
             (when (< (or (:failures segment) 0) n)
-              (let [retry-segment (assoc segment :failures (inc (or (:failures segment) 0)))
-                    session (extensions/create-tx-session queue)]
-                (bounded-write-single-message-to-producers queue session ingress-queues retry-segment)
-                (extensions/close-resource queue session))))]
-    {:produce-f f
+              (let [retry-segment (assoc segment :failures (inc (or (:failures segment) 0)))]
+                (doseq [p producers]
+                  (let [context {:onyx.core/results [retry-segment]}
+                        compression-context (p-ext/compress-batch context)
+                        retry-segment (-> compression-context :onyx.core/compressed first :compressed)]
+                    (extensions/produce-message queue p session retry-segment)
+                    (extensions/close-resource queue p))))))]
+    {:onyx.core/session session
+     :error-producers producers
+     :produce-f f
      :onyx.core/params [f]}))
+
+(defmethod l-ext/close-temporal-resources :exciting-name
+  [_ context]
+  (doseq [p (:error-producers context)]
+    (extensions/close-resource (:onyx.core/queue context) p))
+  {})
 
 (defmethod l-ext/inject-lifecycle-resources :out
   [_ _] {:core-async/out-chan output-chan})

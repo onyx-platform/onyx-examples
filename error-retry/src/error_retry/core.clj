@@ -48,6 +48,12 @@
      :produce-f f
      :onyx.core/params [f]}))
 
+(defmethod l-ext/close-temporal-resources :exciting-name
+  [_ context]
+  (doseq [p (:error-producers context)]
+    (extensions/close-resource (:onyx.core/queue context) p))
+  {})
+
 (defmethod l-ext/inject-lifecycle-resources :out
   [_ _] {:core-async/out-chan output-chan})
 
