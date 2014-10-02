@@ -6,4 +6,4 @@
   :dependencies [[org.clojure/clojure "1.7.0-alpha2"]
                  [org.clojure/core.async "0.1.303.0-886421-alpha"]
                  [com.mdrogalis/onyx "0.4.0-SNAPSHOT"]
-                 [com.mdrogalis/onyx-core-async "0.3.2"]])
+                 [com.mdrogalis/onyx-core-async "0.3.3"]])
