@@ -12,17 +12,16 @@
 (defn split-sentence [{:keys [sentence]}]
   (map (fn [word] {:word word}) (clojure.string/split sentence #"\s+")))
 
-;;; Group segments by word to accrue local state
-(defn group-by-word [segment]
-  (:word segment))
-
 ;;; Use local state to tally up how many of each word we have
 ;;; Emit the empty vector, we'll emit the local state at the end in one shot
 (defn count-words [local-state {:keys [word] :as segment}]
   (swap! local-state (fn [state] (assoc state word (inc (get state word 0)))))
   [])
 
-(def workflow {:input {:split-sentence {:group-by-word {:count-words :output}}}})
+(def workflow
+  [[:input :split-sentence]
+   [:split-sentence :count-words]
+   [:count-words :output]])
 
 ;;; Use core.async for I/O
 (def capacity 1000)
@@ -87,16 +86,11 @@
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
-   {:onyx/name :group-by-word
-    :onyx/fn :aggregation.core/group-by-word
-    :onyx/type :grouper
-    :onyx/consumption :concurrent
-    :onyx/batch-size 1000}
-
    {:onyx/name :count-words
     :onyx/ident :count-words
     :onyx/fn :aggregation.core/count-words
-    :onyx/type :aggregator
+    :onyx/type :function
+    :onyx/group-by-key :word
     :onyx/consumption :concurrent
     :onyx/batch-size 1000}
    
@@ -145,15 +139,7 @@
 
 (onyx.api/submit-job conn {:catalog catalog :workflow workflow})
 
-(defn take-segments! [ch]
-  (loop [x []]
-    (let [segment (<!! ch)]
-      (let [stack (conj x segment)]
-        (if-not (= segment :done)
-          (recur stack)
-          stack)))))
-
-(def results (take-segments! output-chan))
+(def results (onyx.plugin.core-async/take-segments! output-chan))
 
 (clojure.pprint/pprint results)
 
