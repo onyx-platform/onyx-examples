@@ -35,7 +35,7 @@
 (defmethod l-ext/inject-temporal-resources :exciting-name
   [_ {:keys [onyx.core/queue onyx.core/ingress-queues] :as context}]
   (let [session (extensions/create-tx-session queue)
-        producers (doall (map (partial extensions/create-producer queue session) ingress-queues))
+        producers (doall (map (partial extensions/create-producer queue session) (vals ingress-queues)))
         f (fn [segment]
             (doseq [p producers]
               (let [context {:onyx.core/results [segment]}

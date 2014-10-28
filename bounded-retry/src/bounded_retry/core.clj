@@ -36,7 +36,7 @@
 (defmethod l-ext/inject-temporal-resources :exciting-name
   [_ {:keys [onyx.core/queue onyx.core/ingress-queues onyx.core/task-map] :as context}]
   (let [session (extensions/create-tx-session queue)
-        producers (doall (map (partial extensions/create-producer queue session) ingress-queues))
+        producers (doall (map (partial extensions/create-producer queue session) (vals ingress-queues)))
         n (:retry-on-failure/n task-map)
         f (fn [segment]
             (when (< (or (:failures segment) 0) n)
@@ -122,15 +122,7 @@
 
 (onyx.api/submit-job conn {:catalog catalog :workflow workflow})
 
-(defn take-segments! [ch]
-  (loop [x []]
-    (let [segment (<!! ch)]
-      (let [stack (conj x segment)]
-        (if-not (= segment :done)
-          (recur stack)
-          stack)))))
-
-(def results (take-segments! output-chan))
+(def results (onyx.plugin.core-async/take-segments! output-chan))
 
 (clojure.pprint/pprint results)
 
