@@ -10,8 +10,11 @@
 (defn my-dec [{:keys [n] :as segment}]
   (update-in segment [:n] dec))
 
-(def workflow {:input {:inc :output-1
-                       :dec :output-2}})
+(def workflow
+  [[:input :inc]
+   [:input :dec]
+   [:inc :output-1]
+   [:dec :output-2]])
 
 (def capacity 1000)
 
@@ -43,13 +46,13 @@
 
    {:onyx/name :inc
     :onyx/fn :multi-output-workflow.core/my-inc
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
    {:onyx/name :dec
     :onyx/fn :multi-output-workflow.core/my-dec
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 

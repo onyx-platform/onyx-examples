@@ -170,7 +170,7 @@
    {:onyx/name :read-rows
     :onyx/ident :sql/read-rows
     :onyx/fn :onyx.plugin.sql/read-rows
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :sql/classname classname
     :sql/subprotocol subprotocol
@@ -184,7 +184,7 @@
 
    {:onyx/name :prepare-datoms
     :onyx/fn :datomic-mysql-transfer.core/prepare-datoms
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size
     :onyx/doc "Semantically transform the SQL rows to Datomic datoms"}
@@ -269,7 +269,7 @@
    {:onyx/name :read-datoms
     :onyx/ident :datomic/read-datoms
     :onyx/fn :onyx.plugin.datomic/read-datoms
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :datomic/uri db-uri
     :datomic/t t
@@ -278,7 +278,7 @@
 
    {:onyx/name :prepare-rows
     :onyx/fn :datomic-mysql-transfer.core/prepare-rows
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :datomic/uri db-uri
     :datomic/t t

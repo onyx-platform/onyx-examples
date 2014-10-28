@@ -83,7 +83,7 @@
 
    {:onyx/name :split-sentence
     :onyx/fn :aggregation.core/split-sentence
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 

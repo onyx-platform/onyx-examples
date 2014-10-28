@@ -74,7 +74,7 @@
 
    {:onyx/name :exciting-name
     :onyx/fn :bounded-retry.core/exciting-name
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :retry-on-failure/n 3
     :onyx/batch-size batch-size}

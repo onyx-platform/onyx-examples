@@ -1,6 +1,6 @@
 # onyx-examples
 
-Here's a few samples that show off Onyx features.
+Here's a few samples that show off Onyx features in 0.4.0.
 
 ## License
 
