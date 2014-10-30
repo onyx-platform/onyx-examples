@@ -7,7 +7,9 @@
 (defn my-inc [{:keys [n] :as segment}]
   (assoc segment :n (inc n)))
 
-(def workflow {:input {:inc :output}})
+(def workflow
+  [[:input :inc]
+   [:inc :output]])
 
 (def capacity 1000)
 
@@ -34,7 +36,7 @@
   (update-in context [:side-effects] conj :dispatch-by-ident))
 
 ;; Dispatch by type and medium
-(defmethod l-ext/inject-lifecycle-resources [:transformer nil]
+(defmethod l-ext/inject-lifecycle-resources [:function nil]
   [_ context]
   (println "inject-lifecycle-resources: Dispatching by type and medium")
   (update-in context [:side-effects] conj :dispatch-by-type-and-medium))
@@ -59,7 +61,7 @@
    {:onyx/name :inc
     :onyx/ident :my/inc
     :onyx/fn :multiple-side-effect-dispatch.core/my-inc
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 

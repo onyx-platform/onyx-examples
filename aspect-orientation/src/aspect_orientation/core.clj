@@ -51,7 +51,7 @@
 
    {:onyx/name :inc
     :onyx/fn :aspect-orientation.core/my-inc
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 

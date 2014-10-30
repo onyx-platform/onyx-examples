@@ -35,7 +35,7 @@
 (defmethod l-ext/inject-temporal-resources :exciting-name
   [_ {:keys [onyx.core/queue onyx.core/ingress-queues] :as context}]
   (let [session (extensions/create-tx-session queue)
-        producers (doall (map (partial extensions/create-producer queue session) ingress-queues))
+        producers (doall (map (partial extensions/create-producer queue session) (vals ingress-queues)))
         f (fn [segment]
             (doseq [p producers]
               (let [context {:onyx.core/results [segment]}
@@ -64,13 +64,13 @@
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/consumption :sequential
     :onyx/batch-size batch-size
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :exciting-name
     :onyx/fn :error-retry.core/exciting-name
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
@@ -78,7 +78,7 @@
     :onyx/ident :core.async/write-to-chan
     :onyx/type :output
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/consumption :sequential
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}])
 

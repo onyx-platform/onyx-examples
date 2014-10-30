@@ -4,7 +4,9 @@
             [onyx.plugin.core-async]
             [onyx.api]))
 
-(def workflow {:input {:add :output}})
+(def workflow
+  [[:input :add]
+   [:add :output]])
 
 (defn my-adder [k {:keys [n] :as segment}]
   (assoc segment :n (+ n k)))
@@ -41,7 +43,7 @@
    {:onyx/name :add
     :onyx/ident :parameterized.core/my-adder
     :onyx/fn :parameterized.core/my-adder
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size
     :parameterized.core/k 42}

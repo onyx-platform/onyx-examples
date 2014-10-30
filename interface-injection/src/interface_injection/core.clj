@@ -16,7 +16,9 @@
   ;; Because who doesn't ship bugs in prod?
   (times-two [this n] (* n 3)))
 
-(def workflow {:input {:add :output}})
+(def workflow
+  [[:input :add]
+   [:add :output]])
 
 (defn my-adder [t {:keys [n] :as segment}]
   (assoc segment :n (times-two t n)))
@@ -47,7 +49,7 @@
    {:onyx/name :add
     :onyx/ident :interface-injection.core/my-adder
     :onyx/fn :interface-injection.core/my-adder
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size
     :interface-injection.core/k 42}

@@ -35,7 +35,7 @@
    {:onyx/name :inc
     :onyx/ident :my/inc
     :onyx/fn :block-on-job-completion.core/my-inc
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 

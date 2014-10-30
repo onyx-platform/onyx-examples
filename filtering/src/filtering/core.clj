@@ -34,7 +34,7 @@
 
    {:onyx/name :filter
     :onyx/fn :filtering.core/my-filter
-    :onyx/type :transformer
+    :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
