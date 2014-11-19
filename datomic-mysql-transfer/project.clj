@@ -7,9 +7,9 @@
                  [org.clojure/java.jdbc "0.3.3"]
                  [com.datomic/datomic-free "0.9.4755"
                   :exclusions [commons-codec org.hornetq/hornetq-server]]
-                 [com.mdrogalis/onyx "0.4.0"]
-                 [com.mdrogalis/onyx-datomic "0.4.0"]
-                 [com.mdrogalis/onyx-sql "0.4.0"]
+                 [com.mdrogalis/onyx "0.4.1"]
+                 [com.mdrogalis/onyx-datomic "0.4.1"]
+                 [com.mdrogalis/onyx-sql "0.4.1"]
                  [com.mchange/c3p0 "0.9.2.1"]
                  [mysql/mysql-connector-java "5.1.25"]
                  [honeysql "0.4.3"]])
