@@ -79,26 +79,31 @@
 
 (def id (java.util.UUID/randomUUID))
 
-(def coord-opts
+(def scheduler :onyx.job-scheduler/round-robin)
+
+(def env-config
   {:hornetq/mode :vm
-   :hornetq/server? true
    :hornetq.server/type :vm
+   :hornetq/server? true
    :zookeeper/address "127.0.0.1:2186"
    :zookeeper/server? true
    :zookeeper.server/port 2186
    :onyx/id id
-   :onyx.coordinator/revoke-delay 5000})
+   :onyx.peer/job-scheduler scheduler})
 
-(def peer-opts
+(def peer-config
   {:hornetq/mode :vm
    :zookeeper/address "127.0.0.1:2186"
-   :onyx/id id})
+   :onyx/id id
+   :onyx.peer/job-scheduler scheduler})
 
-(def conn (onyx.api/connect :memory coord-opts))
+(def env (onyx.api/start-env env-config))
 
-(def v-peers (onyx.api/start-peers conn 1 peer-opts))
+(def v-peers (onyx.api/start-peers! 1 peer-config))
 
-(onyx.api/submit-job conn {:catalog catalog :workflow workflow})
+(onyx.api/submit-job peer-config
+                     {:catalog catalog :workflow workflow
+                      :task-scheduler :onyx.task-scheduler/round-robin})
 
 (def results
   (loop [x []]
@@ -111,7 +116,7 @@
 (clojure.pprint/pprint results)
 
 (doseq [v-peer v-peers]
-  ((:shutdown-fn v-peer)))
+  (onyx.api/shutdown-peer v-peer))
 
-(onyx.api/shutdown conn)
+(onyx.api/shutdown-env env)
 
