@@ -217,7 +217,7 @@
                                   :task-scheduler :onyx.task-scheduler/round-robin}))
 
 ;;; Block until the job is done, then check Datomic
-@(onyx.api/await-job-completion peer-config job-id)
+(onyx.api/await-job-completion peer-config job-id)
 
 ;;; Take the value of the database
 (def db (d/db datomic-conn))
@@ -329,7 +329,7 @@
               :task-scheduler :onyx.task-scheduler/round-robin}))
 
 ;;; Block until the job is done, then check MySQL
-@(onyx.api/await-job-completion peer-config (str job-id))
+(onyx.api/await-job-completion peer-config (str job-id))
 
 ;;; Aaaaaand stop!
 (doseq [v-peer v-peers]
