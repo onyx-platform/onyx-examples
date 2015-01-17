@@ -124,26 +124,29 @@
 @(d/transact datomic-conn schema)
 
 ;;;;;;;;;;;; Next, we run the Onyx job to transfer the data ;;;;;;;;;;;;;;
+(def id (java.util.UUID/randomUUID))
 
-;;; Create an ID to connect the Coordinator with its peers
-(def id (str (java.util.UUID/randomUUID)))
+(def scheduler :onyx.job-scheduler/round-robin)
 
-;;; Run the Coordinator with HornetQ and ZooKeeper in memory
-(def coord-opts
+(def env-config
   {:hornetq/mode :vm
-   :hornetq/server? true
    :hornetq.server/type :vm
-   :zookeeper/address "127.0.0.1:2185"
+   :hornetq/server? true
+   :zookeeper/address "127.0.0.1:2186"
    :zookeeper/server? true
-   :zookeeper.server/port 2185
+   :zookeeper.server/port 2186
    :onyx/id id
-   :onyx.coordinator/revoke-delay 5000})
+   :onyx.peer/job-scheduler scheduler})
 
-;;; Run the peers with HornetQ in memory
-(def peer-opts
+(def peer-config
   {:hornetq/mode :vm
-   :zookeeper/address "127.0.0.1:2185"
-   :onyx/id id})
+   :zookeeper/address "127.0.0.1:2186"
+   :onyx/id id
+   :onyx.peer/job-scheduler scheduler})
+
+(def env (onyx.api/start-env env-config))
+
+(def v-peers (onyx.api/start-peers! 1 peer-config))
 
 ;;; Partition the MySQL table by ID column, parallel read the rows,
 ;;; do a semantic transformation, write to Datomic.
@@ -208,17 +211,13 @@
                     (:rows segment))]
     {:datoms datoms}))
 
-;;; Connect to the Coordinator
-(def conn (onyx.api/connect :memory coord-opts))
-
-;;; Bring up the working nodes
-(def v-peers (onyx.api/start-peers conn 1 peer-opts))
-
 ;;; And off we go!
-(def job-id (onyx.api/submit-job conn {:catalog catalog :workflow workflow}))
+(def job-id (onyx.api/submit-job peer-config
+                                 {:catalog catalog :workflow workflow
+                                  :task-scheduler :onyx.task-scheduler/round-robin}))
 
 ;;; Block until the job is done, then check Datomic
-@(onyx.api/await-job-completion conn (str job-id))
+@(onyx.api/await-job-completion peer-config job-id)
 
 ;;; Take the value of the database
 (def db (d/db datomic-conn))
@@ -324,16 +323,19 @@
     {:rows (map (fn [name age] {:name name :age age}) names ages)}))
 
 ;;; Submit the next job
-(def job-id (onyx.api/submit-job conn {:catalog catalog :workflow workflow}))
+(def job-id (onyx.api/submit-job
+             peer-config
+             {:catalog catalog :workflow workflow
+              :task-scheduler :onyx.task-scheduler/round-robin}))
 
 ;;; Block until the job is done, then check MySQL
-@(onyx.api/await-job-completion conn (str job-id))
+@(onyx.api/await-job-completion peer-config (str job-id))
 
 ;;; Aaaaaand stop!
 (doseq [v-peer v-peers]
-  ((:shutdown-fn v-peer)))
+  (onyx.api/shutdown-peer v-peer))
 
-(onyx.api/shutdown conn)
+(onyx.api/shutdown-env env)
 
 (prn "MySQL...")
 (clojure.pprint/pprint (jdbc/query conn-pool [(format "SELECT name, age FROM %s" (name copy-table))]))
