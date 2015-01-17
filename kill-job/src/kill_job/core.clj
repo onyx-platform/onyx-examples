@@ -1,13 +1,15 @@
-(ns flat-workflow.core
+(ns kill-job.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async]
             [onyx.api]))
 
-(defn my-inc [{:keys [n] :as segment}]
-  (assoc segment :n (inc n)))
+(def workflow
+  [[:input :add]
+   [:add :output]])
 
-(def workflow {:input {:inc :output}})
+(defn my-adder [{:keys [n] :as segment}]
+  (assoc segment :n (+ n 35)))
 
 (def capacity 1000)
 
@@ -32,8 +34,9 @@
     :onyx/batch-size batch-size
     :onyx/doc "Reads segments from a core.async channel"}
 
-   {:onyx/name :inc
-    :onyx/fn :flat-workflow.core/my-inc
+   {:onyx/name :add
+    :onyx/ident :parameterized.core/my-adder
+    :onyx/fn :kill-job.core/my-adder
     :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
@@ -46,19 +49,8 @@
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}])
 
-(def input-segments
-  [{:n 0}
-   {:n 1}
-   {:n 2}
-   {:n 3}
-   {:n 4}
-   {:n 5}
-   :done])
-
-(doseq [segment input-segments]
-  (>!! input-chan segment))
-
-(close! input-chan)
+;; Don't write any segments to core.async, forcing the job to stall
+;; and do nothing.
 
 (def id (java.util.UUID/randomUUID))
 
@@ -84,17 +76,15 @@
 
 (def v-peers (onyx.api/start-peers! 1 peer-config))
 
-(onyx.api/submit-job
- peer-config
- {:catalog catalog :workflow workflow
-  :task-scheduler :onyx.task-scheduler/round-robin})
+(def job-id
+  (onyx.api/submit-job
+   peer-config
+   {:catalog catalog :workflow workflow
+    :task-scheduler :onyx.task-scheduler/round-robin}))
 
-(def results
-  (doall
-   (map (fn [_] (<!! output-chan))
-        (range (count input-segments)))))
+(def result (onyx.api/kill-job peer-config job-id))
 
-(clojure.pprint/pprint results)
+(prn result)
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))

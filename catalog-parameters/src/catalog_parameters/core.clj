@@ -1,13 +1,15 @@
-(ns flat-workflow.core
+(ns catalog-parameters.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async]
             [onyx.api]))
 
-(defn my-inc [{:keys [n] :as segment}]
-  (assoc segment :n (inc n)))
+(def workflow
+  [[:input :add]
+   [:add :output]])
 
-(def workflow {:input {:inc :output}})
+(defn my-adder [k {:keys [n] :as segment}]
+  (assoc segment :n (+ n k)))
 
 (def capacity 1000)
 
@@ -32,10 +34,13 @@
     :onyx/batch-size batch-size
     :onyx/doc "Reads segments from a core.async channel"}
 
-   {:onyx/name :inc
-    :onyx/fn :flat-workflow.core/my-inc
+   {:onyx/name :add
+    :onyx/ident :parameterized.core/my-adder
+    :onyx/fn :catalog-parameters.core/my-adder
     :onyx/type :function
     :onyx/consumption :concurrent
+    :parameterized.core/k 42
+    :onyx/params [:parameterized.core/k]
     :onyx/batch-size batch-size}
 
    {:onyx/name :output
@@ -84,10 +89,9 @@
 
 (def v-peers (onyx.api/start-peers! 1 peer-config))
 
-(onyx.api/submit-job
- peer-config
- {:catalog catalog :workflow workflow
-  :task-scheduler :onyx.task-scheduler/round-robin})
+(onyx.api/submit-job peer-config
+                     {:catalog catalog :workflow workflow
+                      :task-scheduler :onyx.task-scheduler/round-robin})
 
 (def results
   (doall
