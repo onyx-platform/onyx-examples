@@ -60,7 +60,6 @@
         session (extensions/create-tx-session queue)]
     {:onyx.core/session session
      :onyx.core/params [local-state]
-     :aggregation/state local-state
      :aggregation/emit-delay (emit-word->count event session local-state)}))
 
 (defmethod l-ext/close-temporal-resources :count-words
