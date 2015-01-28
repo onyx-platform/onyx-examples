@@ -5,24 +5,28 @@
             [onyx.plugin.core-async]
             [onyx.api]))
 
-(defn my-inc [{:keys [n] :as segment}]
-  (assoc segment :n (inc n)))
+(defn my-neg [{:keys [n] :as segment}]
+  (assoc segment :n (- n)))
 
-(dire/with-pre-hook! #'my-inc
-  (fn [segment]
-    (println "[Logger] Received segment: " segment)))
-
-(dire/with-post-hook! #'my-inc
-  (fn [result]
-    (println "[Logger] Emitting segment: " result)))
-
-(dire/with-precondition! #'my-inc
+;;; Dire executes pre-conditions before pre-hooks
+(dire/with-precondition! #'my-neg
   :evens-only
   (fn [{:keys [n]}] (even? n)))
 
-(dire/with-handler! #'my-inc
+;;; Dire executes this handler when the specified precondition fails
+(dire/with-handler! #'my-neg
   {:precondition :evens-only}
-  (fn [e & args] []))
+  (fn [e & args]
+    (println "[Logger] Rejected segment: " args " (:evens-only)")
+    []))
+
+(dire/with-pre-hook! #'my-neg
+  (fn [segment]
+    (println "[Logger] Accepted segment: " segment)))
+
+(dire/with-post-hook! #'my-neg
+  (fn [result]
+    (println "[Logger] Emitting segment: " result)))
 
 (def workflow {:input {:inc :output}})
 
@@ -50,7 +54,7 @@
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :inc
-    :onyx/fn :aspect-orientation.core/my-inc
+    :onyx/fn :aspect-orientation.core/my-neg
     :onyx/type :function
     :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
@@ -119,4 +123,3 @@
   (onyx.api/shutdown-peer v-peer))
 
 (onyx.api/shutdown-env env)
-
