@@ -65,7 +65,7 @@
 (def batch-size 10)
 
 (def catalog
-  [{:onyx/name :inp
+  [{:onyx/name :in
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
