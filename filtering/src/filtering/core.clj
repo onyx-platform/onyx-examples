@@ -7,7 +7,9 @@
 (defn my-filter [segment]
   (filter #(even? (:n %)) (vector segment)))
 
-(def workflow {:in {:filter :out}})
+(def workflow
+  [[:in :filter]
+   [:filter :out]])
 
 (def capacity 1000)
 

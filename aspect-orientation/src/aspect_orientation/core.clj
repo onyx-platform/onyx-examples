@@ -28,7 +28,9 @@
   (fn [result]
     (println "[Logger] Emitting segment: " result)))
 
-(def workflow {:in {:inc :out}})
+(def workflow
+  [[:in :inc]
+   [:inc :out]])
 
 (def capacity 1000)
 

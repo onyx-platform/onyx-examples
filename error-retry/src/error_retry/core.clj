@@ -21,7 +21,9 @@
      {:name (str name "!")})
    produce-f))
 
-(def workflow {:in {:exciting-name :out}})
+(def workflow
+  [[:inc :exciting-name]
+   [:exciting-name :out]])
 
 (def capacity 1000)
 

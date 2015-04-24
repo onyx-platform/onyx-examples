@@ -7,7 +7,9 @@
 (defn my-inc [{:keys [n] :as segment}]
   (assoc segment :n (inc n)))
 
-(def workflow {:in {:inc :out}})
+(def workflow
+  [[:in :inc]
+   [:inc :out]])
 
 (def capacity 1000)
 
