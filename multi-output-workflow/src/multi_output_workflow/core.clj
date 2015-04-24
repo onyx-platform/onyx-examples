@@ -114,7 +114,7 @@
  {:catalog catalog :workflow workflow
   :task-scheduler :onyx.task-scheduler/balanced})
 
-(def results-1 (take-segments! Output-1))
+(def results-1 (take-segments! output-chan-1))
 
 (def results-2 (take-segments! output-chan-2))
 

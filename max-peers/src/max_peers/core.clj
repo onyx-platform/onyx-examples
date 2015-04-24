@@ -30,7 +30,7 @@
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
     :onyx/doc "Reads segments from a core.async channel"}
 
@@ -38,7 +38,6 @@
     :onyx/ident :parameterized.core/my-adder
     :onyx/fn :max-peers.core/my-adder
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/max-peers 1
     :onyx/batch-size batch-size}
 
@@ -46,7 +45,7 @@
     :onyx/ident :core.async/write-to-chan
     :onyx/type :output
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}])
 
@@ -72,7 +71,7 @@
 
 (def peer-group (onyx.api/start-peer-group peer-config))
 
-(def v-peers (onyx.api/start-peers n-peers peer-group))
+(def v-peers (onyx.api/start-peers 5 peer-group))
 
 (def job-id
   (onyx.api/submit-job
@@ -81,7 +80,7 @@
     :task-scheduler :onyx.task-scheduler/balanced}))
 
 ;;; Inspect the logs to see that only one peer was assigned
-;;; the :add task. Job will be killed in 10 seconds.
+;;; each task. Job will be killed in 10 seconds.
 
 (Thread/sleep 10000)
 
