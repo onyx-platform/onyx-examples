@@ -112,12 +112,9 @@
 (def id (java.util.UUID/randomUUID))
 
 (def env-config
-  {:hornetq/mode :vm
-   :hornetq.server/type :vm
-   :hornetq/server? true
-   :zookeeper/address "127.0.0.1:2186"
+  {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true
-   :zookeeper.server/port 2186
+   :zookeeper.server/port 2188
    :onyx/id id})
 
 (def peer-config
@@ -127,6 +124,8 @@
    :onyx.peer/job-scheduler :onyx.job-scheduler/balanced})
 
 (def env (onyx.api/start-env env-config))
+
+(def peer-group (onyx.api/start-peer-group peer-config))
 
 (def n-peers (count (set (mapcat identity workflow))))
 

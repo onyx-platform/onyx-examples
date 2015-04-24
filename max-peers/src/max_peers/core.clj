@@ -70,6 +70,8 @@
 
 (def env (onyx.api/start-env env-config))
 
+(def peer-group (onyx.api/start-peer-group peer-config))
+
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
 (def job-id
