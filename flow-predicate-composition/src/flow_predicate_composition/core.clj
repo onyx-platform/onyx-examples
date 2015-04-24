@@ -70,22 +70,22 @@
                      :flow-predicate-composition.core/div-by-2?
                      :flow-predicate-composition.core/div-by-4?]}])
 
-(defn greater-than-4? [event {:keys [n]}]
+(defn greater-than-4? [event old {:keys [n]} all-new]
   (> n 4))
 
-(defn equal-to? [event {:keys [n]} equal-to]
+(defn equal-to? [event old {:keys [n]} all-new equal-to]
   (= n equal-to))
 
-(defn div-by-2? [event {:keys [n]}]
+(defn div-by-2? [event old {:keys [n]} all-new]
   (zero? (mod n 2)))
 
-(defn div-by-4? [event {:keys [n]}]
+(defn div-by-4? [event old {:keys [n]} all-new]
   (zero? (mod n 4)))
 
-(defn odd-segment? [event {:keys [n]}]
+(defn odd-segment? [event old {:keys [n]} all-new]
   (odd? n))
 
-(defn positive-segment? [event {:keys [n]}]
+(defn positive-segment? [event old {:keys [n]} all-new]
   (pos? n))
 
 (def input-segments
@@ -118,10 +118,11 @@
    :onyx/id id})
 
 (def peer-config
-  {:hornetq/mode :vm
-   :zookeeper/address "127.0.0.1:2186"
+  {:zookeeper/address "127.0.0.1:2188"
    :onyx/id id
-   :onyx.peer/job-scheduler :onyx.job-scheduler/balanced})
+   :onyx.peer/job-scheduler :onyx.job-scheduler/balanced
+   :onyx.messaging/impl :core.async
+   :onyx.messaging/bind-addr "localhost"})
 
 (def env (onyx.api/start-env env-config))
 
