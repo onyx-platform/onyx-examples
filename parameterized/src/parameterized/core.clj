@@ -38,7 +38,6 @@
     :onyx/ident :parameterized.core/my-adder
     :onyx/fn :parameterized.core/my-adder
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size
     :parameterized.core/k 42}
 

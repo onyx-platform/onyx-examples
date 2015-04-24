@@ -40,27 +40,25 @@
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :inc
     :onyx/fn :multi-output-workflow.core/my-inc
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
    {:onyx/name :dec
     :onyx/fn :multi-output-workflow.core/my-dec
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
    {:onyx/name :output-1
     :onyx/ident :core.async/write-to-chan
     :onyx/type :output
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}
 
@@ -68,7 +66,7 @@
     :onyx/ident :core.async/write-to-chan
     :onyx/type :output
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}])
 

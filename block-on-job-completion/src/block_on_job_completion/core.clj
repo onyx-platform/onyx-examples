@@ -30,22 +30,21 @@
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size
+    :onyx/max-peers 1
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :inc
     :onyx/ident :my/inc
     :onyx/fn :block-on-job-completion.core/my-inc
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
     :onyx/ident :core.async/write-to-chan
     :onyx/type :output
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}])
 
@@ -86,15 +85,17 @@
 
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
-(def job-id (onyx.api/submit-job peer-config
-                                 {:catalog catalog :workflow workflow
-                                  :task-scheduler :onyx.task-scheduler/balanced}))
+(def job-id
+  (:job-id
+   (onyx.api/submit-job peer-config
+                        {:catalog catalog :workflow workflow
+                         :task-scheduler :onyx.task-scheduler/balanced})))
 
 (println "Job is running. It's ID is: " job-id)
 
 (onyx.api/await-job-completion peer-config job-id)
 
-(println "Job is finished. Unblocking")
+(println "Job is finished. Unblocking now.")
 
 (def results (take-segments! output-chan))
 

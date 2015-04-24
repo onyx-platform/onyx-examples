@@ -173,7 +173,6 @@
     :onyx/ident :sql/read-rows
     :onyx/fn :onyx.plugin.sql/read-rows
     :onyx/type :function
-    :onyx/consumption :concurrent
     :sql/classname classname
     :sql/subprotocol subprotocol
     :sql/subname subname
@@ -187,7 +186,6 @@
    {:onyx/name :prepare-datoms
     :onyx/fn :datomic-mysql-transfer.core/prepare-datoms
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size
     :onyx/doc "Semantically transform the SQL rows to Datomic datoms"}
    
@@ -195,7 +193,6 @@
     :onyx/ident :datomic/commit-tx
     :onyx/type :output
     :onyx/medium :datomic
-    :onyx/consumption :concurrent
     :datomic/uri db-uri
     :onyx/batch-size batch-size
     :onyx/doc "Transacts :datoms to storage"}])
@@ -255,7 +252,6 @@
     :onyx/ident :datomic/partition-datoms
     :onyx/type :input
     :onyx/medium :datomic
-    :onyx/consumption :sequential
     :onyx/bootstrap? true
     :datomic/uri db-uri
     :datomic/t t
@@ -268,7 +264,6 @@
     :onyx/ident :datomic/read-datoms
     :onyx/fn :onyx.plugin.datomic/read-datoms
     :onyx/type :function
-    :onyx/consumption :concurrent
     :datomic/uri db-uri
     :datomic/t t
     :onyx/batch-size batch-size
@@ -277,7 +272,6 @@
    {:onyx/name :prepare-rows
     :onyx/fn :datomic-mysql-transfer.core/prepare-rows
     :onyx/type :function
-    :onyx/consumption :concurrent
     :datomic/uri db-uri
     :datomic/t t
     :onyx/batch-size batch-size
@@ -287,7 +281,6 @@
     :onyx/ident :sql/write-rows
     :onyx/type :output
     :onyx/medium :sql
-    :onyx/consumption :concurrent
     :sql/classname classname
     :sql/subprotocol subprotocol
     :sql/subname subname
@@ -322,13 +315,15 @@
     {:rows (map (fn [name age] {:name name :age age}) names ages)}))
 
 ;;; Submit the next job
-(def job-id (onyx.api/submit-job
-             peer-config
-             {:catalog catalog :workflow workflow
-              :task-scheduler :onyx.task-scheduler/balanced}))
+(def job-id
+  (:job-id
+   (onyx.api/submit-job
+    peer-config
+    {:catalog catalog :workflow workflow
+     :task-scheduler :onyx.task-scheduler/balanced})))
 
 ;;; Block until the job is done, then check MySQL
-(onyx.api/await-job-completion peer-config (str job-id))
+(onyx.api/await-job-completion peer-config job-id)
 
 ;;; Aaaaaand stop!
 (doseq [v-peer v-peers]

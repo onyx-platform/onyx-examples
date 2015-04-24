@@ -41,11 +41,11 @@
 ;; A delay works great here.
 (defn emit-word->count [{:keys [onyx.core/queue] :as event} session local-state]
   (delay
-   (let [compressed-state (fressian/write @local-state)]
+   (let [state @local-state]
      ;; Use the session and send the local state to all downstream tasks.
      (doseq [queue-name (vals (:onyx.core/egress-queues event))]
        (let [producer (extensions/create-producer queue session queue-name)]
-         (extensions/produce-message queue producer session compressed-state)
+         (extensions/produce-message queue producer session state)
          (extensions/close-resource queue producer)))
      ;; Commit the transaction.
      (extensions/commit-tx queue session))))
@@ -77,14 +77,13 @@
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size
+    :onyx/max-peers 1
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :split-sentence
     :onyx/fn :aggregation.core/split-sentence
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
    {:onyx/name :count-words
@@ -92,14 +91,13 @@
     :onyx/fn :aggregation.core/count-words
     :onyx/type :function
     :onyx/group-by-key :word
-    :onyx/consumption :concurrent
     :onyx/batch-size 1000}
    
    {:onyx/name :out
     :onyx/ident :core.async/write-to-chan
     :onyx/type :output
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}])
 
