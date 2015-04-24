@@ -25,13 +25,13 @@
 (def output-chan-2 (chan capacity))
 
 (defmethod l-ext/inject-lifecycle-resources :in
-  [_ _] {:core-async/in-chan input-chan})
+  [_ _] {:core.async/chan input-chan})
 
 (defmethod l-ext/inject-lifecycle-resources :output-1
-  [_ _] {:core-async/out-chan output-chan-1})
+  [_ _] {:core.async/chan output-chan-1})
 
 (defmethod l-ext/inject-lifecycle-resources :output-2
-  [_ _] {:core-async/out-chan output-chan-2})
+  [_ _] {:core.async/chan output-chan-2})
 
 (def batch-size 10)
 

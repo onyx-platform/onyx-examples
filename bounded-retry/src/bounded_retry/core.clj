@@ -33,7 +33,7 @@
 (def output-chan (chan capacity))
 
 (defmethod l-ext/inject-lifecycle-resources :in
-  [_ _] {:core-async/in-chan input-chan})
+  [_ _] {:core.async/chan input-chan})
 
 (defmethod l-ext/inject-temporal-resources :exciting-name
   [_ {:keys [onyx.core/queue onyx.core/ingress-queues onyx.core/task-map] :as context}]
@@ -61,7 +61,7 @@
   {})
 
 (defmethod l-ext/inject-lifecycle-resources :out
-  [_ _] {:core-async/out-chan output-chan})
+  [_ _] {:core.async/chan output-chan})
 
 (def batch-size 10)
 

@@ -31,10 +31,10 @@
 (def output-chan (chan capacity))
 
 (defmethod l-ext/inject-lifecycle-resources :in
-  [_ _] {:core-async/in-chan input-chan})
+  [_ _] {:core.async/chan input-chan})
 
 (defmethod l-ext/inject-lifecycle-resources :out
-  [_ _] {:core-async/out-chan output-chan})
+  [_ _] {:core.async/chan output-chan})
 
 ;; This function will be called multiple times at the end
 ;; since peers are pipelined, so this function has to be idempotent.
