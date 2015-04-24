@@ -146,7 +146,9 @@
 
 (def env (onyx.api/start-env env-config))
 
-(def v-peers (onyx.api/start-peers! 1 peer-config))
+(def n-peers (count (set (mapcat identity workflow))))
+
+(def v-peers (onyx.api/start-peers n-peers peer-group))
 
 ;;; Partition the MySQL table by ID column, parallel read the rows,
 ;;; do a semantic transformation, write to Datomic.
