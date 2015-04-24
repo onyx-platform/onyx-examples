@@ -3,7 +3,7 @@
             [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.peer.pipeline-extensions :as p-ext]
             [onyx.extensions :as extensions]
-            [onyx.plugin.core-async]
+            [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
 (defn retry-on-failure [f produce-f]
@@ -22,7 +22,9 @@
      {:name (str name "!")})
    produce-f))
 
-(def workflow {:in {:exciting-name :out}})
+(def workflow
+  [[:in :exciting-name]
+   [:exciting-name :out]])
 
 (def capacity 1000)
 
@@ -101,7 +103,7 @@
 
 (def id (java.util.UUID/randomUUID))
 
-(def scheduler :onyx.job-scheduler/round-robin)
+(def scheduler :onyx.job-scheduler/balanced)
 
 (def env-config
   {:hornetq/mode :vm
@@ -125,9 +127,9 @@
 
 (onyx.api/submit-job peer-config
                      {:catalog catalog :workflow workflow
-                      :task-scheduler :onyx.task-scheduler/round-robin})
+                      :task-scheduler :onyx.task-scheduler/balanced})
 
-(def results (onyx.plugin.core-async/take-segments! output-chan))
+(def results (/take-segments! output-chan))
 
 (clojure.pprint/pprint results)
 

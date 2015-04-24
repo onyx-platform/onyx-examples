@@ -1,15 +1,30 @@
 (ns multiple-side-effect-dispatch.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.peer.task-lifecycle-extensions :as l-ext]
-            [onyx.plugin.core-async]
+            [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
+
+(def id (java.util.UUID/randomUUID))
+
+(def env-config
+  {:zookeeper/address "127.0.0.1:2188"
+   :zookeeper/server? true
+   :zookeeper.server/port 2188
+   :onyx/id id})
+
+(def peer-config
+  {:zookeeper/address "127.0.0.1:2188"
+   :onyx/id id
+   :onyx.peer/job-scheduler :onyx.job-scheduler/balanced
+   :onyx.messaging/impl :core.async
+   :onyx.messaging/bind-addr "localhost"})
 
 (defn my-inc [{:keys [n] :as segment}]
   (assoc segment :n (inc n)))
 
 (def workflow
-  [[:input :inc]
-   [:inc :output]])
+  [[:in :inc]
+   [:inc :out]])
 
 (def capacity 1000)
 
@@ -17,11 +32,11 @@
 
 (def output-chan (chan capacity))
 
-(defmethod l-ext/inject-lifecycle-resources :input
-  [_ _] {:core-async/in-chan input-chan})
+(defmethod l-ext/inject-lifecycle-resources :in
+  [_ _] {:core.async/chan input-chan})
 
-(defmethod l-ext/inject-lifecycle-resources :output
-  [_ _] {:core-async/out-chan output-chan})
+(defmethod l-ext/inject-lifecycle-resources :out
+  [_ _] {:core.async/chan output-chan})
 
 ;; Dispatch by name
 (defmethod l-ext/inject-lifecycle-resources :inc
@@ -50,27 +65,26 @@
 (def batch-size 10)
 
 (def catalog
-  [{:onyx/name :input
+  [{:onyx/name :inp
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size
+    :onyx/max-peers 1
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :inc
     :onyx/ident :my/inc
     :onyx/fn :multiple-side-effect-dispatch.core/my-inc
     :onyx/type :function
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size}
 
-   {:onyx/name :output
+   {:onyx/name :out
     :onyx/ident :core.async/write-to-chan
     :onyx/type :output
     :onyx/medium :core.async
-    :onyx/consumption :concurrent
     :onyx/batch-size batch-size
+    :onyx/max-peers 1
     :onyx/doc "Writes segments to a core.async channel"}])
 
 (def input-segments
@@ -87,44 +101,26 @@
 
 (close! input-chan)
 
-(def id (java.util.UUID/randomUUID))
-
-(def scheduler :onyx.job-scheduler/round-robin)
-
-(def env-config
-  {:hornetq/mode :vm
-   :hornetq.server/type :vm
-   :hornetq/server? true
-   :zookeeper/address "127.0.0.1:2186"
-   :zookeeper/server? true
-   :zookeeper.server/port 2186
-   :onyx/id id
-   :onyx.peer/job-scheduler scheduler})
-
-(def peer-config
-  {:hornetq/mode :vm
-   :zookeeper/address "127.0.0.1:2186"
-   :onyx/id id
-   :onyx.peer/job-scheduler scheduler})
-
 (def env (onyx.api/start-env env-config))
 
-(def v-peers (onyx.api/start-peers! 1 peer-config))
+(def peer-group (onyx.api/start-peer-group peer-config))
+
+(def n-peers (count (set (mapcat identity workflow))))
+
+(def v-peers (onyx.api/start-peers n-peers peer-group))
 
 (onyx.api/submit-job
  peer-config
  {:catalog catalog :workflow workflow
-  :task-scheduler :onyx.task-scheduler/greedy})
+  :task-scheduler :onyx.task-scheduler/balanced})
 
-(def results
-  (doall
-   (map (fn [_] (<!! output-chan))
-        (range (count input-segments)))))
+(def results (take-segments! output-chan))
 
 (clojure.pprint/pprint results)
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))
 
-(onyx.api/shutdown-env env)
+(onyx.api/shutdown-peer-group peer-group)
 
+(onyx.api/shutdown-env env)

@@ -126,7 +126,7 @@
 ;;;;;;;;;;;; Next, we run the Onyx job to transfer the data ;;;;;;;;;;;;;;
 (def id (java.util.UUID/randomUUID))
 
-(def scheduler :onyx.job-scheduler/round-robin)
+(def scheduler :onyx.job-scheduler/balanced)
 
 (def env-config
   {:hornetq/mode :vm
@@ -214,7 +214,7 @@
 ;;; And off we go!
 (def job-id (onyx.api/submit-job peer-config
                                  {:catalog catalog :workflow workflow
-                                  :task-scheduler :onyx.task-scheduler/round-robin}))
+                                  :task-scheduler :onyx.task-scheduler/balanced}))
 
 ;;; Block until the job is done, then check Datomic
 (onyx.api/await-job-completion peer-config job-id)
@@ -326,7 +326,7 @@
 (def job-id (onyx.api/submit-job
              peer-config
              {:catalog catalog :workflow workflow
-              :task-scheduler :onyx.task-scheduler/round-robin}))
+              :task-scheduler :onyx.task-scheduler/balanced}))
 
 ;;; Block until the job is done, then check MySQL
 (onyx.api/await-job-completion peer-config (str job-id))

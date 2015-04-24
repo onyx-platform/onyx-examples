@@ -90,7 +90,7 @@
   {:hornetq/mode :vm
    :zookeeper/address "127.0.0.1:2186"
    :onyx/id id
-   :onyx.peer/job-scheduler :onyx.job-scheduler/round-robin})
+   :onyx.peer/job-scheduler :onyx.job-scheduler/balanced})
 
 (def env (onyx.api/start-env env-config))
 
@@ -101,7 +101,7 @@
  {:catalog catalog
   :workflow workflow
   :flow-conditions flow-conditions
-  :task-scheduler :onyx.task-scheduler/round-robin})
+  :task-scheduler :onyx.task-scheduler/balanced})
 
 (def results (take-segments! output-chan))
 

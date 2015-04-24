@@ -96,7 +96,7 @@
 
 (def id (java.util.UUID/randomUUID))
 
-(def scheduler :onyx.job-scheduler/round-robin)
+(def scheduler :onyx.job-scheduler/balanced)
 
 (def env-config
   {:hornetq/mode :vm
@@ -121,7 +121,7 @@
 (onyx.api/submit-job
  peer-config
  {:catalog catalog :workflow workflow
-  :task-scheduler :onyx.task-scheduler/round-robin})
+  :task-scheduler :onyx.task-scheduler/balanced})
 
 (defn take-segments! [ch]
   (loop [x []]

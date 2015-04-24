@@ -11,8 +11,8 @@
   (update-in segment [:n] dec))
 
 (def workflow
-  [[:input :inc]
-   [:input :dec]
+  [[:in :inc]
+   [:in :dec]
    [:inc :output-1]
    [:dec :output-2]])
 
@@ -24,7 +24,7 @@
 
 (def output-chan-2 (chan capacity))
 
-(defmethod l-ext/inject-lifecycle-resources :input
+(defmethod l-ext/inject-lifecycle-resources :in
   [_ _] {:core-async/in-chan input-chan})
 
 (defmethod l-ext/inject-lifecycle-resources :output-1
@@ -36,7 +36,7 @@
 (def batch-size 10)
 
 (def catalog
-  [{:onyx/name :input
+  [{:onyx/name :in
     :onyx/ident :core.async/read-from-chan
     :onyx/type :input
     :onyx/medium :core.async
@@ -88,7 +88,7 @@
 
 (def id (java.util.UUID/randomUUID))
 
-(def scheduler :onyx.job-scheduler/round-robin)
+(def scheduler :onyx.job-scheduler/balanced)
 
 (def env-config
   {:hornetq/mode :vm
@@ -113,17 +113,11 @@
 (onyx.api/submit-job
  peer-config
  {:catalog catalog :workflow workflow
-  :task-scheduler :onyx.task-scheduler/round-robin})
+  :task-scheduler :onyx.task-scheduler/balanced})
 
-(def results-1
-  (doall
-   (map (fn [_] (<!! output-chan-1))
-        (range (count input-segments)))))
+(def results-1 (take-segments! Output-1))
 
-(def results-2
-  (doall
-   (map (fn [_] (<!! output-chan-2))
-        (range (count input-segments)))))
+(def results-2 (take-segments! output-chan-2))
 
 (println "Original segments:")
 (clojure.pprint/pprint input-segments)
@@ -141,5 +135,6 @@
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))
 
-(onyx.api/shutdown-env env)
+(onyx.api/shutdown-peer-group peer-group)
 
+(onyx.api/shutdown-env env)
