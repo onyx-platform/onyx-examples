@@ -1,7 +1,7 @@
 (ns flat-workflow.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.peer.task-lifecycle-extensions :as l-ext]
-            [onyx.plugin.core-async]
+            [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
 (defn my-inc [{:keys [n] :as segment}]

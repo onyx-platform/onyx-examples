@@ -3,7 +3,7 @@
             [clojure.data.fressian :as fressian]
             [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.extensions :as extensions]
-            [onyx.plugin.core-async]
+            [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
 ;;; Word count!

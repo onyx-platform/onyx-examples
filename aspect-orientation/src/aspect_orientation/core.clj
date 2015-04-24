@@ -2,7 +2,7 @@
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [dire.core :as dire]
             [onyx.peer.task-lifecycle-extensions :as l-ext]
-            [onyx.plugin.core-async]
+            [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
 (defn my-neg [{:keys [n] :as segment}]
