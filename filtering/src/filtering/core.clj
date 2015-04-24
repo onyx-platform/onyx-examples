@@ -81,8 +81,6 @@
 
 (def peer-group (onyx.api/start-peer-group peer-config))
 
-(def peer-group (onyx.api/start-peer-group peer-config))
-
 (def n-peers (count (set (mapcat identity workflow))))
 
 (def v-peers (onyx.api/start-peers n-peers peer-group))
