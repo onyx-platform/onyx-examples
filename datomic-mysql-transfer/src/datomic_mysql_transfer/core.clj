@@ -126,8 +126,6 @@
 ;;;;;;;;;;;; Next, we run the Onyx job to transfer the data ;;;;;;;;;;;;;;
 (def id (java.util.UUID/randomUUID))
 
-(def scheduler :onyx.job-scheduler/balanced)
-
 (def env-config
   {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true

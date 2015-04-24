@@ -78,8 +78,6 @@
 
 (def id (java.util.UUID/randomUUID))
 
-(def scheduler :onyx.job-scheduler/balanced)
-
 (def env-config
   {:hornetq/mode :vm
    :hornetq.server/type :vm
