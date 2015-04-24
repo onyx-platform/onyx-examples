@@ -94,12 +94,9 @@
 (def id (java.util.UUID/randomUUID))
 
 (def env-config
-  {:hornetq/mode :vm
-   :hornetq.server/type :vm
-   :hornetq/server? true
-   :zookeeper/address "127.0.0.1:2186"
+  {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true
-   :zookeeper.server/port 2186
+   :zookeeper.server/port 2188
    :onyx/id id})
 
 (def peer-config

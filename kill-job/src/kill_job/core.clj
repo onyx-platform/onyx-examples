@@ -57,20 +57,17 @@
 (def scheduler :onyx.job-scheduler/balanced)
 
 (def env-config
-  {:hornetq/mode :vm
-   :hornetq.server/type :vm
-   :hornetq/server? true
-   :zookeeper/address "127.0.0.1:2186"
+  {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true
-   :zookeeper.server/port 2186
-   :onyx/id id
-   :onyx.peer/job-scheduler scheduler})
+   :zookeeper.server/port 2188
+   :onyx/id id})
 
 (def peer-config
-  {:hornetq/mode :vm
-   :zookeeper/address "127.0.0.1:2186"
+  {:zookeeper/address "127.0.0.1:2188"
    :onyx/id id
-   :onyx.peer/job-scheduler scheduler})
+   :onyx.peer/job-scheduler :onyx.job-scheduler/balanced
+   :onyx.messaging/impl :core.async
+   :onyx.messaging/bind-addr "localhost"})
 
 (def env (onyx.api/start-env env-config))
 
