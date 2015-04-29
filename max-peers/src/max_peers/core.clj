@@ -1,6 +1,5 @@
 (ns max-peers.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
-            [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
@@ -16,12 +15,6 @@
 (def input-chan (chan capacity))
 
 (def output-chan (chan capacity))
-
-(defmethod l-ext/inject-lifecycle-resources :in
-  [_ _] {:core.async/chan input-chan})
-
-(defmethod l-ext/inject-lifecycle-resources :out
-  [_ _] {:core.async/chan output-chan})
 
 (def batch-size 10)
 
@@ -73,10 +66,32 @@
 
 (def v-peers (onyx.api/start-peers 5 peer-group))
 
+(defn inject-in-ch [event lifecycle]
+  {:core.async/chan in-chan})
+
+(defn inject-out-ch [event lifecycle]
+  {:core.async/chan out-chan})
+
+(def in-calls
+  {:lifecycle/before-task inject-in-ch})
+
+(def out-calls
+  {:lifecycle/before-task inject-out-ch})
+
+(def lifecycles
+  [{:lifecycle/task :in
+    :lifecycle/calls :onyx.peer.min-peers-test/in-calls}
+   {:lifecycle/task :in
+    :lifecycle/calls :onyx.plugin.core-async/reader-calls}
+   {:lifecycle/task :out
+    :lifecycle/calls :onyx.peer.min-peers-test/out-calls}
+   {:lifecycle/task :out
+    :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
+
 (def job-id
   (onyx.api/submit-job
    peer-config
-   {:catalog catalog :workflow workflow
+   {:catalog catalog :workflow workflow :lifecycles lifecycles
     :task-scheduler :onyx.task-scheduler/balanced}))
 
 ;;; Inspect the logs to see that only one peer was assigned

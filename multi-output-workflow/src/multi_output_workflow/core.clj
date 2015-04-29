@@ -1,6 +1,5 @@
 (ns multi-output-workflow.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
-            [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
@@ -23,15 +22,6 @@
 (def output-chan-1 (chan capacity))
 
 (def output-chan-2 (chan capacity))
-
-(defmethod l-ext/inject-lifecycle-resources :in
-  [_ _] {:core.async/chan input-chan})
-
-(defmethod l-ext/inject-lifecycle-resources :output-1
-  [_ _] {:core.async/chan output-chan-1})
-
-(defmethod l-ext/inject-lifecycle-resources :output-2
-  [_ _] {:core.async/chan output-chan-2})
 
 (def batch-size 10)
 
@@ -107,9 +97,41 @@
 
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
+(defn inject-in-ch [event lifecycle]
+  {:core.async/chan input-chan})
+
+(defn inject-out-1-ch [event lifecycle]
+  {:core.async/chan output-chan-1})
+
+(defn inject-out-2-ch [event lifecycle]
+  {:core.async/chan output-chan-2})
+
+(def in-calls
+  {:lifecycle/before-task inject-in-ch})
+
+(def out-1-calls
+  {:lifecycle/before-task inject-out-1-ch})
+
+(def out-2-calls
+  {:lifecycle/before-task inject-out-2-ch})
+
+(def lifecycles
+  [{:lifecycle/task :in
+    :lifecycle/calls :parameterized.core/in-calls}
+   {:lifecycle/task :in
+    :lifecycle/calls :onyx.plugin.core-async/reader-calls}
+   {:lifecycle/task :output-1
+    :lifecycle/calls :parameterized.core/out-1-calls}
+   {:lifecycle/task :output-1
+    :lifecycle/calls :onyx.plugin.core-async/writer-calls}
+   {:lifecycle/task :output-2
+    :lifecycle/calls :parameterized.core/out-2-calls}
+   {:lifecycle/task :output-2
+    :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
+
 (onyx.api/submit-job
  peer-config
- {:catalog catalog :workflow workflow
+ {:catalog catalog :workflow workflow :lifecycles lifecycles
   :task-scheduler :onyx.task-scheduler/balanced})
 
 (def results-1 (take-segments! output-chan-1))

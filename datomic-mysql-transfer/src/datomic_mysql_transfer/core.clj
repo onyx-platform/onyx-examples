@@ -1,7 +1,6 @@
 (ns datomic-mysql-transfer.core
   (:require [clojure.java.jdbc :as jdbc]
             [datomic.api :as d]
-            [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.datomic]
             [onyx.plugin.sql]
             [onyx.api])
@@ -209,7 +208,7 @@
 
 ;;; And off we go!
 (def job-id (onyx.api/submit-job peer-config
-                                 {:catalog catalog :workflow workflow
+                                 {:catalog catalog :workflow workflow :lifecycles lifecycles
                                   :task-scheduler :onyx.task-scheduler/balanced}))
 
 ;;; Block until the job is done, then check Datomic
@@ -245,7 +244,9 @@
 
 ;;; Partition the datoms index, read datoms in parallel,
 ;;; semantically transform from datoms to rows, write to MySQL.
-(def workflow {:partition-datoms {:read-datoms {:prepare-rows :write-to-mysql}}})
+(def workflow
+  [[:read-datoms :prepare-rows]
+   [:prepare-rows :write-rows]])
 
 (def catalog
   [{:onyx/name :partition-datoms
@@ -319,11 +320,14 @@
   (:job-id
    (onyx.api/submit-job
     peer-config
-    {:catalog catalog :workflow workflow
+    {:catalog catalog :workflow workflow :lifecycles lifecycles
      :task-scheduler :onyx.task-scheduler/balanced})))
 
 ;;; Block until the job is done, then check MySQL
 (onyx.api/await-job-completion peer-config job-id)
+
+(prn "MySQL...")
+(clojure.pprint/pprint (jdbc/query conn-pool [(format "SELECT name, age FROM %s" (name copy-table))]))
 
 ;;; Aaaaaand stop!
 (doseq [v-peer v-peers]
@@ -332,6 +336,3 @@
 (onyx.api/shutdown-peer-group peer-group)
 
 (onyx.api/shutdown-env env)
-
-(prn "MySQL...")
-(clojure.pprint/pprint (jdbc/query conn-pool [(format "SELECT name, age FROM %s" (name copy-table))]))

@@ -1,6 +1,5 @@
-(ns multiple-side-effect-dispatch.core
+(ns lifecycles.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
-            [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
@@ -32,35 +31,59 @@
 
 (def output-chan (chan capacity))
 
-(defmethod l-ext/inject-lifecycle-resources :in
-  [_ _] {:core.async/chan input-chan})
+;; Execute before task
+(defn inc-before-task
+  [event lifecycle]
+  (println "Executing before task")
+  {})
 
-(defmethod l-ext/inject-lifecycle-resources :out
-  [_ _] {:core.async/chan output-chan})
+;; Execute after task
+(defn inc-after-task
+  [event lifecycle]
+  (println "Executing after task")
+  {})
 
-;; Dispatch by name
-(defmethod l-ext/inject-lifecycle-resources :inc
-  [_ context]
-  (println "inject-lifecycle-resources: Dispatching by name")
-  (update-in context [:side-effects] conj :dispatch-by-name))
+;; Executing before batch
+(defn inc-before-batch
+  [event lifecycle]
+  (println "Executing before batch")
+  {})
 
-;; Dispatch by identity
-(defmethod l-ext/inject-lifecycle-resources :my/inc
-  [_ context]
-  (println "inject-lifecycle-resources: Dispatching by identity")
-  (update-in context [:side-effects] conj :dispatch-by-ident))
+;; Executing after batch
+(defn inc-before-batch
+  [event lifecycle]
+  (println "Executing after batch")
+  {})
 
-;; Dispatch by type and medium
-(defmethod l-ext/inject-lifecycle-resources [:function nil]
-  [_ context]
-  (println "inject-lifecycle-resources: Dispatching by type and medium")
-  (update-in context [:side-effects] conj :dispatch-by-type-and-medium))
+(defn inject-in-ch [event lifecycle]
+  {:core.async/chan in-chan})
 
-;; Dispatch by name to see the value we built up.
-(defmethod l-ext/close-lifecycle-resources :inc
-  [_ context]
-  (println "close-lifecycle-resources: Dispatching by name")
-  (println "Conj'ed list: " (:side-effects context)))
+(defn inject-out-ch [event lifecycle]
+  {:core.async/chan out-chan})
+
+(def in-calls
+  {:lifecycle/before-task inject-in-ch})
+
+(def inc-calls
+  {:lifecycle/before-task inc-before-task
+   :lifecycle/before-batch inc-before-batch
+   :lifecycle/after-batch inc-after-batch
+   :lifecycle/after-task inc-after-task})
+
+(def out-calls
+  {:lifecycle/before-task inject-out-ch})
+
+(def lifecycles
+  [{:lifecycle/task :in
+    :lifecycle/calls :lifecycles.core/in-calls}
+   {:lifecycle/task :in
+    :lifecycle/calls :onyx.plugin.core-async/reader-calls}
+   {:lifecycle/task :inc
+    :lifecycle/calls :lifecycles.core/inc-calls}
+   {:lifecycle/task :out
+    :lifecycle/calls :lifecycles.core/out-calls}
+   {:lifecycle/task :out
+    :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
 (def batch-size 10)
 
@@ -75,7 +98,7 @@
 
    {:onyx/name :inc
     :onyx/ident :my/inc
-    :onyx/fn :multiple-side-effect-dispatch.core/my-inc
+    :onyx/fn :lifecycles.core/my-inc
     :onyx/type :function
     :onyx/batch-size batch-size}
 
@@ -111,7 +134,7 @@
 
 (onyx.api/submit-job
  peer-config
- {:catalog catalog :workflow workflow
+ {:catalog catalog :workflow workflow :lifecycles lifecycles
   :task-scheduler :onyx.task-scheduler/balanced})
 
 (def results (take-segments! output-chan))

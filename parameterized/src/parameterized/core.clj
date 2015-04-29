@@ -1,6 +1,5 @@
 (ns parameterized.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
-            [onyx.peer.task-lifecycle-extensions :as l-ext]
             [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
 
@@ -52,8 +51,8 @@
 (defn my-adder [k {:keys [n] :as segment}]
   (assoc segment :n (+ n k)))
 
-(defmethod l-ext/inject-lifecycle-resources :parameterized.core/my-adder
-  [_ {:keys [onyx.core/task-map onyx.core/fn-params] :as pipeline}]
+(defn inject-add-state
+  [{:keys [onyx.core/task-map onyx.core/fn-params] :as pipeline} lifecycle]
   (let [k (:parameterized.core/k task-map)]
     {:onyx.core/params [k]}))
 
@@ -62,12 +61,6 @@
 (def input-chan (chan capacity))
 
 (def output-chan (chan capacity))
-
-(defmethod l-ext/inject-lifecycle-resources :in
-  [_ _] {:core.async/chan input-chan})
-
-(defmethod l-ext/inject-lifecycle-resources :out
-  [_ _] {:core.async/chan output-chan})
 
 (def input-segments
   [{:n 0}
@@ -91,9 +84,36 @@
 
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
+(defn inject-in-ch [event lifecycle]
+  {:core.async/chan in-chan})
+
+(defn inject-out-ch [event lifecycle]
+  {:core.async/chan out-chan})
+
+(def in-calls
+  {:lifecycle/before-task inject-in-ch})
+
+(def add-calls
+  {:lifecycle/before-task inject-add-state})
+
+(def out-calls
+  {:lifecycle/before-task inject-out-ch})
+
+(def lifecycles
+  [{:lifecycle/task :in
+    :lifecycle/calls :parameterized.core/in-calls}
+   {:lifecycle/task :in
+    :lifecycle/calls :onyx.plugin.core-async/reader-calls}
+   {:lifecycle/task :add
+    :lifecycle/calls :parameterized.core/add-calls}
+   {:lifecycle/task :out
+    :lifecycle/calls :parameterized.core/out-calls}
+   {:lifecycle/task :out
+    :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
+
 (onyx.api/submit-job
  peer-config
- {:catalog catalog :workflow workflow
+ {:catalog catalog :workflow workflow :lifecycles lifecycles
   :task-scheduler :onyx.task-scheduler/balanced})
 
 (def results (take-segments! output-chan))
