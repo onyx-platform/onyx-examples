@@ -99,10 +99,10 @@
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan in-chan})
+  {:core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
-  {:core.async/chan out-chan})
+  {:core.async/chan output-chan})
 
 (def in-calls
   {:lifecycle/before-task inject-in-ch})
@@ -112,11 +112,11 @@
 
 (def lifecycles
   [{:lifecycle/task :in
-    :lifecycle/calls :onyx.peer.min-peers-test/in-calls}
+    :lifecycle/calls :aspect-orientation.core/in-calls}
    {:lifecycle/task :in
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}
    {:lifecycle/task :out
-    :lifecycle/calls :onyx.peer.min-peers-test/out-calls}
+    :lifecycle/calls :aspect-orientation.core/out-calls}
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
