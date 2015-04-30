@@ -50,16 +50,16 @@
   {})
 
 ;; Executing after batch
-(defn inc-before-batch
+(defn inc-after-batch
   [event lifecycle]
   (println "Executing after batch")
   {})
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan in-chan})
+  {:core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
-  {:core.async/chan out-chan})
+  {:core.async/chan output-chan})
 
 (def in-calls
   {:lifecycle/before-task inject-in-ch})

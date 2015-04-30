@@ -85,10 +85,10 @@
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan in-chan})
+  {:core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
-  {:core.async/chan out-chan})
+  {:core.async/chan output-chan})
 
 (def in-calls
   {:lifecycle/before-task inject-in-ch})

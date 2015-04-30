@@ -117,10 +117,10 @@
    :onyx.messaging/bind-addr "localhost"})
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan in-chan})
+  {:core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
-  {:core.async/chan out-chan})
+  {:core.async/chan output-chan})
 
 (def in-calls
   {:lifecycle/before-task inject-in-ch})
@@ -130,11 +130,11 @@
 
 (def lifecycles
   [{:lifecycle/task :in
-    :lifecycle/calls :onyx.peer.min-peers-test/in-calls}
+    :lifecycle/calls :flow-predicate-composition.core/in-calls}
    {:lifecycle/task :in
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}
    {:lifecycle/task :out
-    :lifecycle/calls :onyx.peer.min-peers-test/out-calls}
+    :lifecycle/calls :flow-predicate-composition.core/out-calls}
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 

@@ -117,15 +117,15 @@
 
 (def lifecycles
   [{:lifecycle/task :in
-    :lifecycle/calls :parameterized.core/in-calls}
+    :lifecycle/calls :multi-output-workflow.core/in-calls}
    {:lifecycle/task :in
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}
    {:lifecycle/task :output-1
-    :lifecycle/calls :parameterized.core/out-1-calls}
+    :lifecycle/calls :multi-output-workflow.core/out-1-calls}
    {:lifecycle/task :output-1
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}
    {:lifecycle/task :output-2
-    :lifecycle/calls :parameterized.core/out-2-calls}
+    :lifecycle/calls :multi-output-workflow.core/out-2-calls}
    {:lifecycle/task :output-2
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 

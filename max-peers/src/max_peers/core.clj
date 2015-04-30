@@ -28,7 +28,7 @@
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :add
-    :onyx/ident :parameterized.core/my-adder
+    :onyx/ident :max-peers.core/my-adder
     :onyx/fn :max-peers.core/my-adder
     :onyx/type :function
     :onyx/max-peers 1
@@ -67,10 +67,10 @@
 (def v-peers (onyx.api/start-peers 5 peer-group))
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan in-chan})
+  {:core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
-  {:core.async/chan out-chan})
+  {:core.async/chan output-chan})
 
 (def in-calls
   {:lifecycle/before-task inject-in-ch})
@@ -80,11 +80,11 @@
 
 (def lifecycles
   [{:lifecycle/task :in
-    :lifecycle/calls :onyx.peer.min-peers-test/in-calls}
+    :lifecycle/calls :max-peers.core/in-calls}
    {:lifecycle/task :in
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}
    {:lifecycle/task :out
-    :lifecycle/calls :onyx.peer.min-peers-test/out-calls}
+    :lifecycle/calls :max-peers.core/out-calls}
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
