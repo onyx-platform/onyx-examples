@@ -1,6 +1,5 @@
 (ns aggregation.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
-            [clojure.data.fressian :as fressian]
             [onyx.extensions :as extensions]
             [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
@@ -29,39 +28,18 @@
 
 (def output-chan (chan capacity))
 
-;; This function will be called multiple times at the end
-;; since peers are pipelined, so this function has to be idempotent.
-;; A delay works great here.
-(defn emit-word->count [{:keys [onyx.core/queue] :as event} session local-state]
-  (delay
-   (let [state @local-state]
-     ;; Use the session and send the local state to all downstream tasks.
-     (doseq [queue-name (vals (:onyx.core/egress-queues event))]
-       (let [producer (extensions/create-producer queue session queue-name)]
-         (extensions/produce-message queue producer session state)
-         (extensions/close-resource queue producer)))
-     ;; Commit the transaction.
-     (extensions/commit-tx queue session))))
+(defn inject-word-count-resources [event lifecycle]
+  (let [state (atom {})]
+    {:aggregation/state state
+     :onyx.core/params [state]}))
 
-;; Set up local state. Use an atom for keeping track of
-;; how many words we see. The HornetQ session isn't available
-;; at this point in the lifecycle, so we create our own and return
-;; it. Onyx happily uses our session for transactions instead.
-(defmethod l-ext/inject-lifecycle-resources :count-words
-  [_ {:keys [onyx.core/queue] :as event}]
-  (let [local-state (atom {})
-        session (extensions/create-tx-session queue)]
-    {:onyx.core/session session
-     :onyx.core/params [local-state]
-     :aggregation/emit-delay (emit-word->count event session local-state)}))
-
-(defmethod l-ext/close-temporal-resources :count-words
-  [_ {:keys [onyx.core/queue] :as event}]
-  ;; Only do this when it's the last batch.
-  (when (:onyx.core/tail-batch? event)
-    (force (:aggregation/emit-delay event)))
-  ;; All side-effect API hooks must return a map.
+(defn close-word-count-resources [event lifecycle]
+  (prn "Totals: " @(:aggregation/state event))
   {})
+
+(def count-words-calls
+  {:lifecycle/before-task-start inject-word-count-resources
+   :lifecycle/after-task-end close-word-count-resources})
 
 (def batch-size 10)
 
@@ -84,6 +62,8 @@
     :onyx/fn :aggregation.core/count-words
     :onyx/type :function
     :onyx/group-by-key :word
+    :onyx/flux-policy :kill
+    :onyx/min-peers 1
     :onyx/batch-size 1000}
    
    {:onyx/name :out
@@ -140,28 +120,29 @@
   {:core.async/chan output-chan})
 
 (def in-calls
-  {:lifecycle/before-task inject-in-ch})
+  {:lifecycle/before-task-start inject-in-ch})
 
 (def out-calls
-  {:lifecycle/before-task inject-out-ch})
+  {:lifecycle/before-task-start inject-out-ch})
 
 (def lifecycles
   [{:lifecycle/task :in
     :lifecycle/calls :aggregation.core/in-calls}
    {:lifecycle/task :in
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}
+   {:lifecycle/task :count-words
+    :lifecycle/calls :aggregation.core/count-words-calls}
    {:lifecycle/task :out
     :lifecycle/calls :aggregation.core/out-calls}
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(onyx.api/submit-job peer-config
-                     {:catalog catalog :workflow workflow :lifecycles lifecycles
-                      :task-scheduler :onyx.task-scheduler/balanced})
+(onyx.api/submit-job
+ peer-config
+ {:catalog catalog :workflow workflow :lifecycles lifecycles
+  :task-scheduler :onyx.task-scheduler/balanced})
 
-(def results (onyx.plugin.core-async/take-segments! output-chan))
-
-(clojure.pprint/pprint results)
+(onyx.plugin.core-async/take-segments! output-chan)
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))
