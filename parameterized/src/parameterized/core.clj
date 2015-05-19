@@ -91,13 +91,13 @@
   {:core.async/chan output-chan})
 
 (def in-calls
-  {:lifecycle/before-task inject-in-ch})
+  {:lifecycle/before-task-start inject-in-ch})
 
 (def add-calls
-  {:lifecycle/before-task inject-add-state})
+  {:lifecycle/before-task-start inject-add-state})
 
 (def out-calls
-  {:lifecycle/before-task inject-out-ch})
+  {:lifecycle/before-task-start inject-out-ch})
 
 (def lifecycles
   [{:lifecycle/task :in

@@ -62,16 +62,16 @@
   {:core.async/chan output-chan})
 
 (def in-calls
-  {:lifecycle/before-task inject-in-ch})
+  {:lifecycle/before-task-start inject-in-ch})
 
 (def inc-calls
-  {:lifecycle/before-task inc-before-task
+  {:lifecycle/before-task-start inc-before-task
    :lifecycle/before-batch inc-before-batch
    :lifecycle/after-batch inc-after-batch
-   :lifecycle/after-task inc-after-task})
+   :lifecycle/after-task-end inc-after-task})
 
 (def out-calls
-  {:lifecycle/before-task inject-out-ch})
+  {:lifecycle/before-task-start inject-out-ch})
 
 (def lifecycles
   [{:lifecycle/task :in
