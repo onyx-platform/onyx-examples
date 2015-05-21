@@ -68,7 +68,7 @@
   {:lifecycle/before-task-start inc-before-task
    :lifecycle/before-batch inc-before-batch
    :lifecycle/after-batch inc-after-batch
-   :lifecycle/after-task-end inc-after-task})
+   :lifecycle/after-task-stop inc-after-task})
 
 (def out-calls
   {:lifecycle/before-task-start inject-out-ch})

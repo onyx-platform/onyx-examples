@@ -39,7 +39,7 @@
 
 (def count-words-calls
   {:lifecycle/before-task-start inject-word-count-resources
-   :lifecycle/after-task-end close-word-count-resources})
+   :lifecycle/after-task-stop close-word-count-resources})
 
 (def batch-size 10)
 
