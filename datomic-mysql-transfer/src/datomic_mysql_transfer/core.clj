@@ -20,9 +20,9 @@
 
 (def user "root")
 
-(def password "password")
+(def password "")
 
-;;; Concurrency knob that you can tune
+;;; Throughput knob that you can tune
 (def batch-size 1000)
 
 ;;; The table to read out of
@@ -142,21 +142,22 @@
 
 (def peer-group (onyx.api/start-peer-group peer-config))
 
+;;; Partition the MySQL table by ID column, parallel read the rows,
+;;; do a semantic transformation, write to Datomic.
+(def workflow
+  [[:partition-keys :read-rows]
+   [:read-rows :prepare-datoms]
+   [:prepare-datoms :write-to-datomic]])
+
 (def n-peers (count (set (mapcat identity workflow))))
 
 (def v-peers (onyx.api/start-peers n-peers peer-group))
-
-;;; Partition the MySQL table by ID column, parallel read the rows,
-;;; do a semantic transformation, write to Datomic.
-(def workflow {:partition-keys {:read-rows {:prepare-datoms :write-to-datomic}}})
 
 (def catalog
   [{:onyx/name :partition-keys
     :onyx/ident :sql/partition-keys
     :onyx/type :input
     :onyx/medium :sql
-    :onyx/consumption :sequential
-    :onyx/bootstrap? true
     :sql/classname classname
     :sql/subprotocol subprotocol
     :sql/subname subname
@@ -166,6 +167,7 @@
     :sql/id id-column
     :sql/rows-per-segment 1000
     :onyx/batch-size batch-size
+    :onyx/max-peers 1
     :onyx/doc "Partitions a range of primary keys into subranges"}
 
    {:onyx/name :read-rows
@@ -187,29 +189,38 @@
     :onyx/type :function
     :onyx/batch-size batch-size
     :onyx/doc "Semantically transform the SQL rows to Datomic datoms"}
-   
+
    {:onyx/name :write-to-datomic
-    :onyx/ident :datomic/commit-tx
+    :onyx/ident :datomic/commit-bulk-tx
     :onyx/type :output
     :onyx/medium :datomic
     :datomic/uri db-uri
+    :datomic/partition :com.mdrogalis/people
     :onyx/batch-size batch-size
-    :onyx/doc "Transacts :datoms to storage"}])
+    :onyx/doc "Transacts segments to storage"}])
 
 ;;; We need to prepare the datoms before we send it to the Datomic plugin.
 ;;; Set the temp ids and batch the segments into the :datoms key.
 (defn prepare-datoms [segment]
-  (let [datoms (map (fn [row]
-                      {:db/id (d/tempid :com.mdrogalis/people)
-                       :user/name (:name row)
-                       :user/age (:age row)})
-                    (:rows segment))]
-    {:datoms datoms}))
+  {:tx [{:db/id (d/tempid :com.mdrogalis/people)
+         :user/name (:name segment)
+         :user/age (:age segment)}]})
+
+(def lifecycles
+  [{:lifecycle/task :partition-keys
+    :lifecycle/calls :onyx.plugin.sql/partition-keys-calls}
+   {:lifecycle/task :read-rows
+    :lifecycle/calls :onyx.plugin.sql/read-rows-calls}
+   {:lifecycle/task :write-to-datomic
+    :lifecycle/calls :onyx.plugin.datomic/write-tx-calls}])
 
 ;;; And off we go!
-(def job-id (onyx.api/submit-job peer-config
-                                 {:catalog catalog :workflow workflow :lifecycles lifecycles
-                                  :task-scheduler :onyx.task-scheduler/balanced}))
+(def job-id
+  (:job-id
+   (onyx.api/submit-job
+    peer-config
+    {:catalog catalog :workflow workflow :lifecycles lifecycles
+     :task-scheduler :onyx.task-scheduler/balanced})))
 
 ;;; Block until the job is done, then check Datomic
 (onyx.api/await-job-completion peer-config job-id)
@@ -246,29 +257,21 @@
 ;;; semantically transform from datoms to rows, write to MySQL.
 (def workflow
   [[:read-datoms :prepare-rows]
-   [:prepare-rows :write-rows]])
+   [:prepare-rows :write-to-mysql]])
 
 (def catalog
-  [{:onyx/name :partition-datoms
-    :onyx/ident :datomic/partition-datoms
+  [{:onyx/name :read-datoms
+    :onyx/ident :datomic/read-datoms
     :onyx/type :input
     :onyx/medium :datomic
-    :onyx/bootstrap? true
     :datomic/uri db-uri
     :datomic/t t
     :datomic/partition :com.mdrogalis/people
-    :datomic/datoms-per-segment 1000
+    :datomic/datoms-index :eavt
+    :datomic/datoms-per-segment 20
+    :onyx/max-peers 1
     :onyx/batch-size batch-size
-    :onyx/doc "Creates ranges over an :eavt index to parellelize loading datoms"}
-
-   {:onyx/name :read-datoms
-    :onyx/ident :datomic/read-datoms
-    :onyx/fn :onyx.plugin.datomic/read-datoms
-    :onyx/type :function
-    :datomic/uri db-uri
-    :datomic/t t
-    :onyx/batch-size batch-size
-    :onyx/doc "Reads and enqueues a range of the :eavt datom index"}
+    :onyx/doc "Reads a sequence of datoms from the d/datoms API"}
 
    {:onyx/name :prepare-rows
     :onyx/fn :datomic-mysql-transfer.core/prepare-rows
@@ -288,16 +291,19 @@
     :sql/user user
     :sql/password password
     :sql/table copy-table
-    :onyx/batch-size 1000
+    :onyx/batch-size batch-size
     :onyx/doc "Writes segments from the :rows keys to the SQL database"}])
 
 ;;; We're going to need to get a hold of the database for queries down
 ;;; below. Inject it in as a parameter to the prepare-rows function.
-(defmethod l-ext/inject-lifecycle-resources :prepare-rows
-  [_ {:keys [onyx.core/task-map onyx.core/fn-params] :as pipeline}]
+(defn inject-db-value
+  [{:keys [onyx.core/task-map onyx.core/fn-params] :as pipeline} lifecycle]
   (let [conn (d/connect (:datomic/uri task-map))
         db (d/as-of (d/db conn) (:datomic/t task-map))]
     {:onyx.core/params [db]}))
+
+(def prepare-rows-calls
+  {:lifecycle/before-task-start inject-db-value})
 
 ;;; Semantic preparation from datoms to rows for MySQL.
 ;;; We'll have to query Datomic after we get each age, because
@@ -314,6 +320,14 @@
                      (ffirst)))
               names)]
     {:rows (map (fn [name age] {:name name :age age}) names ages)}))
+
+(def lifecycles
+  [{:lifecycle/task :read-datoms
+    :lifecycle/calls :onyx.plugin.datomic/read-datoms-calls}
+   {:lifecycle/task :prepare-rows
+    :lifecycle/calls :datomic-mysql-transfer.core/prepare-rows-calls}
+   {:lifecycle/task :write-to-mysql
+    :lifecycle/calls :onyx.plugin.sql/write-rows-calls}])
 
 ;;; Submit the next job
 (def job-id
