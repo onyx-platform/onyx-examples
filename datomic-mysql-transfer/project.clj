@@ -6,9 +6,9 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/java.jdbc "0.3.3"]
                  [com.datomic/datomic-free "0.9.5173"]
-                 [com.mdrogalis/onyx "0.6.0-beta1"]
-                 [com.mdrogalis/onyx-datomic "0.6.0-beta1"]
-                 [com.mdrogalis/onyx-sql "0.6.0-beta1"]
+                 [org.onyxplatform/onyx "0.6.0-RC1"]
+                 [org.onyxplatform/onyx-datomic "0.6.0-RC1"]
+                 [org.onyxplatform/onyx-sql "0.6.0-RC1"]
                  [com.mchange/c3p0 "0.9.2.1"]
                  [mysql/mysql-connector-java "5.1.25"]
                  [honeysql "0.4.3"]])
