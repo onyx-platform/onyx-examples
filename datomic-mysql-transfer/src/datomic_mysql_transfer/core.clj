@@ -23,7 +23,7 @@
 (def password "")
 
 ;;; Throughput knob that you can tune
-(def batch-size 1000)
+(def batch-size 20)
 
 ;;; The table to read out of
 (def table :people)
