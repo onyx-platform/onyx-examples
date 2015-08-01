@@ -26,7 +26,7 @@
 
 (def catalog
   [{:onyx/name :in
-    :onyx/ident :core.async/read-from-chan
+    :onyx/ident :onyx.plugin.core-async/input
     :onyx/type :input
     :onyx/medium :core.async
     :onyx/batch-size batch-size
@@ -41,7 +41,7 @@
     :parameterized.core/k 42}
 
    {:onyx/name :out
-    :onyx/ident :core.async/write-to-chan
+    :onyx/ident :onyx.plugin.core-async/output
     :onyx/type :output
     :onyx/medium :core.async
     :onyx/max-peers 1
