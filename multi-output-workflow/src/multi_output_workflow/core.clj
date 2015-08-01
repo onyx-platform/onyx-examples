@@ -27,7 +27,7 @@
 
 (def catalog
   [{:onyx/name :in
-    :onyx/ident :onyx.plugin.core-async/input
+    :onyx/plugin :onyx.plugin.core-async/input
     :onyx/type :input
     :onyx/medium :core.async
     :onyx/max-peers 1
@@ -45,7 +45,7 @@
     :onyx/batch-size batch-size}
 
    {:onyx/name :output-1
-    :onyx/ident :onyx.plugin.core-async/output
+    :onyx/plugin :onyx.plugin.core-async/output
     :onyx/type :output
     :onyx/medium :core.async
     :onyx/max-peers 1
@@ -53,7 +53,7 @@
     :onyx/doc "Writes segments to a core.async channel"}
 
    {:onyx/name :output-2
-    :onyx/ident :onyx.plugin.core-async/output
+    :onyx/plugin :onyx.plugin.core-async/output
     :onyx/type :output
     :onyx/medium :core.async
     :onyx/max-peers 1

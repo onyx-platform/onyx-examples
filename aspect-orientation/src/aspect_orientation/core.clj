@@ -41,7 +41,7 @@
 
 (def catalog
   [{:onyx/name :in
-    :onyx/ident :onyx.plugin.core-async/input
+    :onyx/plugin :onyx.plugin.core-async/input
     :onyx/type :input
     :onyx/medium :core.async
     :onyx/max-peers 1
@@ -54,7 +54,7 @@
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
-    :onyx/ident :onyx.plugin.core-async/output
+    :onyx/plugin :onyx.plugin.core-async/output
     :onyx/type :output
     :onyx/medium :core.async
     :onyx/max-peers 1

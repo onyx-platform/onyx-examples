@@ -155,7 +155,7 @@
 
 (def catalog
   [{:onyx/name :partition-keys
-    :onyx/ident :sql/partition-keys
+    :onyx/plugin :sql/partition-keys
     :onyx/type :input
     :onyx/medium :sql
     :sql/classname classname
@@ -171,7 +171,6 @@
     :onyx/doc "Partitions a range of primary keys into subranges"}
 
    {:onyx/name :read-rows
-    :onyx/ident :sql/read-rows
     :onyx/fn :onyx.plugin.sql/read-rows
     :onyx/type :function
     :sql/classname classname
@@ -191,7 +190,7 @@
     :onyx/doc "Semantically transform the SQL rows to Datomic datoms"}
 
    {:onyx/name :write-to-datomic
-    :onyx/ident :datomic/commit-bulk-tx
+    :onyx/plugin :datomic/commit-bulk-tx
     :onyx/type :output
     :onyx/medium :datomic
     :datomic/uri db-uri
@@ -261,7 +260,7 @@
 
 (def catalog
   [{:onyx/name :read-datoms
-    :onyx/ident :datomic/read-datoms
+    :onyx/plugin :datomic/read-datoms
     :onyx/type :input
     :onyx/medium :datomic
     :datomic/uri db-uri
@@ -282,7 +281,7 @@
     :onyx/doc "Semantically transform the Datomic datoms to SQL rows"}
 
    {:onyx/name :write-to-mysql
-    :onyx/ident :sql/write-rows
+    :onyx/plugin :sql/write-rows
     :onyx/type :output
     :onyx/medium :sql
     :sql/classname classname

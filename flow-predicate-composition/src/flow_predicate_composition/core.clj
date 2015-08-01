@@ -20,7 +20,7 @@
 
 (def catalog
   [{:onyx/name :in
-    :onyx/ident :onyx.plugin.core-async/input
+    :onyx/plugin :onyx.plugin.core-async/input
     :onyx/type :input
     :onyx/medium :core.async
     :onyx/max-peers 1
@@ -28,14 +28,13 @@
     :onyx/doc "Reads segments from a core.async channel"}
 
    {:onyx/name :identity
-    :onyx/ident :flow-predicate-composition.core/my-identity
     :onyx/fn :flow-predicate-composition.core/my-identity
     :onyx/type :function
     :onyx/batch-size batch-size
     :parameterized.core/k 42}
 
    {:onyx/name :out
-    :onyx/ident :onyx.plugin.core-async/output
+    :onyx/plugin :onyx.plugin.core-async/output
     :onyx/type :output
     :onyx/medium :core.async
     :onyx/max-peers 1
