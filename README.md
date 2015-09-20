@@ -1,10 +1,10 @@
 # onyx-examples
 
-Here's a few samples that show off Onyx features in 0.6.0-RC1.
+Here's a few samples that show off Onyx features as of version 0.7.5.
 
 ## License
 
-Copyright © 2014 Michael Drogalis
+Copyright © 2015 Distributed Masonry LLC
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.

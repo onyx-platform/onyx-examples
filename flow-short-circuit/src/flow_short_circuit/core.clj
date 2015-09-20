@@ -94,7 +94,8 @@
   {:zookeeper/address "127.0.0.1:2188"
    :onyx/id id
    :onyx.peer/job-scheduler :onyx.job-scheduler/balanced
-   :onyx.messaging/impl :core.async
+   :onyx.messaging/impl :aeron
+   :onyx.messaging/peer-port-range [40200 40400]
    :onyx.messaging/bind-addr "localhost"})
 
 (defn inject-in-ch [event lifecycle]
@@ -144,3 +145,5 @@
 (onyx.api/shutdown-peer-group peer-group)
 
 (onyx.api/shutdown-env env)
+
+(shutdown-agents)
