@@ -10,12 +10,6 @@
 (defn split-sentence [{:keys [sentence]}]
   (map (fn [word] {:word word}) (clojure.string/split sentence #"\s+")))
 
-;;; Use local state to tally up how many of each word we have
-;;; Emit the empty vector, we'll emit the local state at the end in one shot
-(defn count-words [local-state {:keys [word] :as segment}]
-  (swap! local-state (fn [state] (assoc state word (inc (get state word 0)))))
-  [])
-
 (def workflow
   [[:in :split-sentence]
    [:split-sentence :count-words]
@@ -27,19 +21,6 @@
 (def input-chan (chan capacity))
 
 (def output-chan (chan capacity))
-
-(defn inject-word-count-resources [event lifecycle]
-  (let [state (atom {})]
-    {:aggregation/state state
-     :onyx.core/params [state]}))
-
-(defn close-word-count-resources [event lifecycle]
-  (prn "Totals: " @(:aggregation/state event))
-  {})
-
-(def count-words-calls
-  {:lifecycle/before-task-start inject-word-count-resources
-   :lifecycle/after-task-stop close-word-count-resources})
 
 (def batch-size 10)
 
@@ -58,7 +39,7 @@
     :onyx/batch-size batch-size}
 
    {:onyx/name :count-words
-    :onyx/fn :aggregation.core/count-words
+    :onyx/fn :clojure.core/identity
     :onyx/type :function
     :onyx/group-by-key :word
     :onyx/flux-policy :kill
@@ -73,13 +54,31 @@
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments to a core.async channel"}])
 
+(def windows
+  [{:window/id :word-counter
+    :window/task :count-words
+    :window/type :global
+    :window/aggregation :onyx.windowing.aggregation/count
+    :window/window-key :event-time}])
+
+(def triggers
+  [{:trigger/window-id :word-counter
+    :trigger/refinement :accumulating
+    :trigger/on :segment
+    :trigger/threshold [5 :elements]
+    :trigger/sync ::dump-window!}])
+
+(defn dump-window! [event window-id lower-bound upper-bound state]
+  (println (format "Window extent %s, [%s - %s] contents: %s"
+                   window-id lower-bound upper-bound state)))
+
 ;; Seriously, my coffee's gone cold. :/
 (def input-segments
-  [{:sentence "My name is Mike"}
-   {:sentence "My coffee's gone cold"}
-   {:sentence "Time to get a new cup"}
-   {:sentence "Coffee coffee coffee"}
-   {:sentence "Om nom nom nom"}
+  [{:event-time 0 :sentence "My name is Mike"}
+   {:event-time 0 :sentence "My coffee's gone cold"}
+   {:event-time 0 :sentence "Time to get a new cup"}
+   {:event-time 0 :sentence "Coffee coffee coffee"}
+   {:event-time 0 :sentence "Om nom nom nom"}
    :done])
 
 (doseq [segment input-segments]
@@ -95,6 +94,9 @@
   {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true
    :zookeeper.server/port 2188
+   :onyx.bookkeeper/server? true
+   :onyx.bookkeeper/local-quorum? true
+   :onyx.bookkeeper/local-quorum-ports [3196 3197 3198]
    :onyx/id id})
 
 (def peer-config
@@ -102,7 +104,7 @@
    :onyx/id id
    :onyx.peer/job-scheduler :onyx.job-scheduler/balanced
    :onyx.messaging/impl :aeron
-   :onyx.messaging/peer-port-range [40200 40400]
+   :onyx.messaging/peer-port 40200
    :onyx.messaging/bind-addr "localhost"})
 
 (def env (onyx.api/start-env env-config))
@@ -130,8 +132,6 @@
     :lifecycle/calls :aggregation.core/in-calls}
    {:lifecycle/task :in
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}
-   {:lifecycle/task :count-words
-    :lifecycle/calls :aggregation.core/count-words-calls}
    {:lifecycle/task :out
     :lifecycle/calls :aggregation.core/out-calls}
    {:lifecycle/task :out
@@ -139,7 +139,11 @@
 
 (onyx.api/submit-job
  peer-config
- {:catalog catalog :workflow workflow :lifecycles lifecycles
+ {:workflow workflow
+  :catalog catalog
+  :lifecycles lifecycles
+  :windows windows
+  :triggers triggers
   :task-scheduler :onyx.task-scheduler/balanced})
 
 (onyx.plugin.core-async/take-segments! output-chan)
@@ -150,5 +154,3 @@
 (onyx.api/shutdown-peer-group peer-group)
 
 (onyx.api/shutdown-env env)
-
-(shutdown-agents)
