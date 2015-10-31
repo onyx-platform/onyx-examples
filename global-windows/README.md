@@ -1,4 +1,4 @@
-# sliding-windows
+# global-windows
 
 Demonstrates using the Sliding windowing feature.
 
