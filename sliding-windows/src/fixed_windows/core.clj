@@ -1,4 +1,4 @@
-(ns fixed-windows.core
+(ns sliding-windows.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.plugin.core-async :refer [take-segments!]]
             [onyx.api]))
@@ -103,16 +103,17 @@
 (def windows
   [{:window/id :collect-segments
     :window/task :identity
-    :window/type :fixed
+    :window/type :sliding
     :window/aggregation :onyx.windowing.aggregation/conj
     :window/window-key :event-time
-    :window/range [5 :minutes]}])
+    :window/range [5 :minutes]
+    :window/slide [1 :minute]}])
 
 (def triggers
   [{:trigger/window-id :collect-segments
     :trigger/refinement :accumulating
-    :trigger/on :timer
-    :trigger/period [1 :second]
+    :trigger/on :segment
+    :trigger/threshold [5 :elements]
     :trigger/sync ::dump-window!}])
 
 (defn dump-window! [event window-id lower-bound upper-bound state]
@@ -131,7 +132,7 @@
 (def results (take-segments! output-chan))
 
 ;; Sleep until the trigger timer fires.
-(Thread/sleep 3000)
+(Thread/sleep 5000)
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))
