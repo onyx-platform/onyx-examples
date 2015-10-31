@@ -1,6 +1,6 @@
-# global-windows
+# session-windows
 
-Demonstrates using the Global windowing feature.
+Demonstrates using the Session windowing feature.
 
 ## License
 
