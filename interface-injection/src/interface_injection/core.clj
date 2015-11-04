@@ -80,7 +80,7 @@
    :onyx/id id
    :onyx.peer/job-scheduler :onyx.job-scheduler/balanced
    :onyx.messaging/impl :aeron
-   :onyx.messaging/peer-port-range [40200 40400]
+   :onyx.messaging/peer-port 40200
    :onyx.messaging/bind-addr "localhost"
    :onyx.peer/fn-params {:add [(DevelopmentMultiplication.)]}})
 
