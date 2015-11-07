@@ -39,6 +39,7 @@
 
    {:onyx/name :identity
     :onyx/fn :clojure.core/identity
+    :onyx/uniqueness-key :id
     :onyx/type :function
     :onyx/batch-size batch-size}
 
