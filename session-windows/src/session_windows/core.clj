@@ -40,7 +40,7 @@
    {:onyx/name :identity
     :onyx/fn :clojure.core/identity
     :onyx/type :function
-    :onyx/uniqueness-key :id
+    :onyx/uniqueness-key :event-id
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
@@ -58,13 +58,13 @@
 (def output-chan (chan capacity))
 
 (def input-segments
-  [{:id 1 :event-time #inst "2015-09-13T03:00:00.829-00:00"}
-   {:id 1 :event-time #inst "2015-09-13T03:03:00.829-00:00"}
-   {:id 1 :event-time #inst "2015-09-13T03:07:00.829-00:00"}
-   {:id 2 :event-time #inst "2015-09-13T03:11:00.829-00:00"}
-   {:id 2 :event-time #inst "2015-09-13T03:15:00.829-00:00"}
-   {:id 2 :event-time #inst "2015-09-13T03:35:00.829-00:00"}
-   {:id 1 :event-time #inst "2015-09-13T03:20:00.829-00:00"}
+  [{:event-id 0 :id 1 :event-time #inst "2015-09-13T03:00:00.829-00:00"}
+   {:event-id 1 :id 1 :event-time #inst "2015-09-13T03:03:00.829-00:00"}
+   {:event-id 2 :id 1 :event-time #inst "2015-09-13T03:07:00.829-00:00"}
+   {:event-id 3 :id 2 :event-time #inst "2015-09-13T03:11:00.829-00:00"}
+   {:event-id 4 :id 2 :event-time #inst "2015-09-13T03:15:00.829-00:00"}
+   {:event-id 5 :id 2 :event-time #inst "2015-09-13T03:35:00.829-00:00"}
+   {:event-id 6 :id 1 :event-time #inst "2015-09-13T03:20:00.829-00:00"}
    :done])
 
 (doseq [segment input-segments]
