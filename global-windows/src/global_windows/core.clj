@@ -40,7 +40,7 @@
    {:onyx/name :identity
     :onyx/fn :clojure.core/identity
     :onyx/type :function
-    :onyx/uniqueness-key :id
+    :onyx/uniqueness-key :n
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
@@ -63,13 +63,10 @@
    {:n 2 :event-time #inst "2015-09-13T03:07:00.829-00:00"}
    {:n 3 :event-time #inst "2015-09-13T03:11:00.829-00:00"}
    {:n 4 :event-time #inst "2015-09-13T03:15:00.829-00:00"}
-   {:n 5 :event-time #inst "2015-09-13T03:02:00.829-00:00"}
-   :done])
+   {:n 5 :event-time #inst "2015-09-13T03:02:00.829-00:00"}])
 
 (doseq [segment input-segments]
   (>!! input-chan segment))
-
-(close! input-chan)
 
 (def env (onyx.api/start-env env-config))
 
@@ -128,10 +125,14 @@
   :triggers triggers
   :task-scheduler :onyx.task-scheduler/balanced})
 
-(def results (take-segments! output-chan))
-
 ;; Sleep until the trigger timer fires.
 (Thread/sleep 5000)
+
+(>!! input-chan :done)
+
+(close! input-chan)
+
+(def results (take-segments! output-chan))
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))
