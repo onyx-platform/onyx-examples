@@ -156,7 +156,7 @@
 
 (def catalog
   [{:onyx/name :partition-keys
-    :onyx/plugin :sql/partition-keys
+    :onyx/plugin :onyx.plugin.sql/partition-keys
     :onyx/type :input
     :onyx/medium :sql
     :sql/classname classname
@@ -191,7 +191,7 @@
     :onyx/doc "Semantically transform the SQL rows to Datomic datoms"}
 
    {:onyx/name :write-to-datomic
-    :onyx/plugin :datomic/commit-bulk-tx
+    :onyx/plugin :onyx.plugin.datomic/write-bulk-datoms
     :onyx/type :output
     :onyx/medium :datomic
     :datomic/uri db-uri
@@ -212,7 +212,7 @@
    {:lifecycle/task :read-rows
     :lifecycle/calls :onyx.plugin.sql/read-rows-calls}
    {:lifecycle/task :write-to-datomic
-    :lifecycle/calls :onyx.plugin.datomic/write-tx-calls}])
+    :lifecycle/calls :onyx.plugin.datomic/write-bulk-tx-calls}])
 
 ;;; And off we go!
 (def job-id
@@ -261,7 +261,7 @@
 
 (def catalog
   [{:onyx/name :read-datoms
-    :onyx/plugin :datomic/read-datoms
+    :onyx/plugin :onyx.plugin.datomic/read-datoms
     :onyx/type :input
     :onyx/medium :datomic
     :datomic/uri db-uri
@@ -282,7 +282,7 @@
     :onyx/doc "Semantically transform the Datomic datoms to SQL rows"}
 
    {:onyx/name :write-to-mysql
-    :onyx/plugin :sql/write-rows
+    :onyx/plugin :onyx.plugin.sql/write-rows
     :onyx/type :output
     :onyx/medium :sql
     :sql/classname classname
