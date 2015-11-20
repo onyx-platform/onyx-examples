@@ -11,19 +11,17 @@
 
 ;;; Def some top-level constants to use below
 
-(def db-name "onyx_example")
+(def db-name (or (env :test-db-name) "onyx_input_test"))
+
+(def db-user (or (env :test-db-user) "root"))
+
+(def db-pass "")
 
 (def classname "com.mysql.jdbc.Driver")
 
 (def subprotocol "mysql")
 
 (def subname (format "//127.0.0.1:3306/%s" db-name))
-
-(def db-user (or (env :test-db-user) "root"))
-
-(def db-name (or (env :test-db-name) "onyx_input_test"))
-
-(def db-pass "")
 
 ;;; Throughput knob that you can tune
 (def batch-size 20)
