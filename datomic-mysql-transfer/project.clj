@@ -9,6 +9,7 @@
                  [org.onyxplatform/onyx "0.8.0"]
                  [org.onyxplatform/onyx-datomic "0.8.0.1"]
                  [org.onyxplatform/onyx-sql "0.8.0.1"]
+                 [environ "1.0.1"]
                  [com.mchange/c3p0 "0.9.2.1"]
                  [mysql/mysql-connector-java "5.1.27"]
                  [honeysql "0.4.3"]])
