@@ -1,6 +1,6 @@
 (ns datomic-mysql-transfer.core
   (:require [clojure.java.jdbc :as jdbc]
-            [environ.core :refer [env]]
+            [environ.core :as environ]
             [datomic.api :as d]
             [onyx.plugin.datomic]
             [onyx.plugin.sql]
@@ -11,9 +11,9 @@
 
 ;;; Def some top-level constants to use below
 
-(def db-name (or (env :test-db-name) "onyx_input_test"))
+(def db-name (or (environ/env :test-db-name) "onyx_input_test"))
 
-(def db-user (or (env :test-db-user) "root"))
+(def db-user (or (environ/env :test-db-user) "root"))
 
 (def db-pass "")
 
