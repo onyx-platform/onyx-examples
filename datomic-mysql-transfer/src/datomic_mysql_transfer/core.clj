@@ -1,5 +1,6 @@
 (ns datomic-mysql-transfer.core
   (:require [clojure.java.jdbc :as jdbc]
+            [environ.core :refer [env]]
             [datomic.api :as d]
             [onyx.plugin.datomic]
             [onyx.plugin.sql]
@@ -18,9 +19,11 @@
 
 (def subname (format "//127.0.0.1:3306/%s" db-name))
 
-(def user "root")
+(def db-user (or (env :test-db-user) "root"))
 
-(def password "")
+(def db-name (or (env :test-db-name) "onyx_input_test"))
+
+(def db-pass "")
 
 ;;; Throughput knob that you can tune
 (def batch-size 20)
@@ -39,8 +42,8 @@
   {:classname classname
    :subprotocol subprotocol
    :subname subname
-   :user user
-   :password password})
+   :user db-user
+   :password db-pass})
 
 ;;; Create a pool of connections for the virtual peers of Onyx to share
 (defn pool [spec]

@@ -4,5 +4,10 @@ test:
           - ./test_projects.sh
 
 machine:
-  java:
+ environment:
+    TEST_DB_USER: "ubuntu"
+    TEST_DB_NAME: "circle_test"
+ java:
     version: oraclejdk8
+ services:
+         - mysql
