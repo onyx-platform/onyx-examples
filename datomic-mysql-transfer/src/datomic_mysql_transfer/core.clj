@@ -21,7 +21,7 @@
 
 (def subprotocol "mysql")
 
-(def subname (format "//127.0.0.1:3306/%s" db-name))
+(def subname "//127.0.0.1:3306")
 
 ;;; Throughput knob that you can tune
 (def batch-size 20)
@@ -67,6 +67,15 @@
 (jdbc/execute! conn-pool [(format "create database %s" db-name)])
 
 (jdbc/execute! conn-pool [(format "use %s" db-name)])
+
+(def db-spec
+  {:classname "com.mysql.jdbc.Driver"
+   :subprotocol "mysql"
+   :subname (str db-sub-base "/" db-name)
+   :user db-user
+   :password db-pass})
+
+(def conn-pool (pool db-spec))
 
 ;;; Create the table we'll be reading out of
 (jdbc/execute!
