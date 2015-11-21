@@ -71,7 +71,7 @@
 (def db-spec
   {:classname "com.mysql.jdbc.Driver"
    :subprotocol "mysql"
-   :subname (str db-sub-base "/" db-name)
+   :subname (str subname "/" db-name)
    :user db-user
    :password db-pass})
 
