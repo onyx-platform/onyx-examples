@@ -1,0 +1,13 @@
+test:
+  override:
+          - echo '{:user {:plugins [[lein-exec "0.3.5"]]}}' > ~/.lein/profiles.clj
+          - ./test_projects.sh
+
+machine:
+ environment:
+    TEST_DB_USER: "ubuntu"
+    TEST_DB_NAME: "circle_test"
+ java:
+    version: oraclejdk8
+ services:
+         - mysql

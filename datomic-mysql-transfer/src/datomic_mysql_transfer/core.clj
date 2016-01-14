@@ -1,5 +1,6 @@
 (ns datomic-mysql-transfer.core
   (:require [clojure.java.jdbc :as jdbc]
+            [environ.core :as environ]
             [datomic.api :as d]
             [onyx.plugin.datomic]
             [onyx.plugin.sql]
@@ -10,17 +11,17 @@
 
 ;;; Def some top-level constants to use below
 
-(def db-name "onyx_example")
+(def db-name (or (environ/env :test-db-name) "onyx_input_test"))
+
+(def db-user (or (environ/env :test-db-user) "root"))
+
+(def db-pass "")
 
 (def classname "com.mysql.jdbc.Driver")
 
 (def subprotocol "mysql")
 
-(def subname (format "//127.0.0.1:3306/%s" db-name))
-
-(def user "root")
-
-(def password "")
+(def subname "//127.0.0.1:3306")
 
 ;;; Throughput knob that you can tune
 (def batch-size 20)
@@ -39,8 +40,8 @@
   {:classname classname
    :subprotocol subprotocol
    :subname subname
-   :user user
-   :password password})
+   :user db-user
+   :password db-pass})
 
 ;;; Create a pool of connections for the virtual peers of Onyx to share
 (defn pool [spec]
@@ -66,6 +67,15 @@
 (jdbc/execute! conn-pool [(format "create database %s" db-name)])
 
 (jdbc/execute! conn-pool [(format "use %s" db-name)])
+
+(def db-spec
+  {:classname "com.mysql.jdbc.Driver"
+   :subprotocol "mysql"
+   :subname (str subname "/" db-name)
+   :user db-user
+   :password db-pass})
+
+(def conn-pool (pool db-spec))
 
 ;;; Create the table we'll be reading out of
 (jdbc/execute!
@@ -351,4 +361,4 @@
 
 (onyx.api/shutdown-env env)
 
-(shutdown-agents)
+
