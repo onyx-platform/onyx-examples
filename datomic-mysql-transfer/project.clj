@@ -12,4 +12,5 @@
                  [environ "1.0.1"]
                  [com.mchange/c3p0 "0.9.2.1"]
                  [mysql/mysql-connector-java "5.1.27"]
-                 [honeysql "0.4.3"]])
+                 [honeysql "0.4.3"]]
+  :plugins [[lein-update-dependency "0.1.2"]])
