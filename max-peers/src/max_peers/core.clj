@@ -89,10 +89,11 @@
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
 (def job-id
-  (onyx.api/submit-job
-   peer-config
-   {:catalog catalog :workflow workflow :lifecycles lifecycles
-    :task-scheduler :onyx.task-scheduler/balanced}))
+  (:job-id
+   (onyx.api/submit-job
+    peer-config
+    {:catalog catalog :workflow workflow :lifecycles lifecycles
+     :task-scheduler :onyx.task-scheduler/balanced})))
 
 ;;; Inspect the logs to see that only one peer was assigned
 ;;; each task. Job will be killed in 10 seconds.
