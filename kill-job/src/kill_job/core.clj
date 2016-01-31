@@ -90,10 +90,11 @@
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
 (def job-id
-  (onyx.api/submit-job
-   peer-config
-   {:catalog catalog :workflow workflow :lifecycles lifecycles
-    :task-scheduler :onyx.task-scheduler/balanced}))
+  (:job-id
+   (onyx.api/submit-job
+    peer-config
+    {:catalog catalog :workflow workflow :lifecycles lifecycles
+     :task-scheduler :onyx.task-scheduler/balanced})))
 
 (def result (onyx.api/kill-job peer-config job-id))
 
