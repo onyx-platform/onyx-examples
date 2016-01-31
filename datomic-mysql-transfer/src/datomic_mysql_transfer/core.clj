@@ -23,6 +23,8 @@
 
 (def subname "//127.0.0.1:3306")
 
+(def db-subname (str subname "/" db-name))
+
 ;;; Throughput knob that you can tune
 (def batch-size 20)
 
@@ -71,7 +73,7 @@
 (def db-spec
   {:classname "com.mysql.jdbc.Driver"
    :subprotocol "mysql"
-   :subname (str subname "/" db-name)
+   :subname db-subname
    :user db-user
    :password db-pass})
 
@@ -171,9 +173,9 @@
     :onyx/medium :sql
     :sql/classname classname
     :sql/subprotocol subprotocol
-    :sql/subname subname
-    :sql/user user
-    :sql/password password
+    :sql/subname db-subname
+    :sql/user db-user
+    :sql/password db-pass
     :sql/table table
     :sql/id id-column
     :sql/rows-per-segment 1000
@@ -186,9 +188,9 @@
     :onyx/type :function
     :sql/classname classname
     :sql/subprotocol subprotocol
-    :sql/subname subname
-    :sql/user user
-    :sql/password password
+    :sql/subname db-subname
+    :sql/user db-user
+    :sql/password db-pass
     :sql/table table
     :sql/id id-column
     :onyx/batch-size batch-size
@@ -297,9 +299,9 @@
     :onyx/medium :sql
     :sql/classname classname
     :sql/subprotocol subprotocol
-    :sql/subname subname
-    :sql/user user
-    :sql/password password
+    :sql/subname db-subname
+    :sql/user db-user
+    :sql/password db-pass
     :sql/table copy-table
     :onyx/batch-size batch-size
     :onyx/doc "Writes segments from the :rows keys to the SQL database"}])
@@ -360,5 +362,3 @@
 (onyx.api/shutdown-peer-group peer-group)
 
 (onyx.api/shutdown-env env)
-
-
