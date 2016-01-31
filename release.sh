@@ -28,9 +28,13 @@ for DIR in $(ls -d */); do
   cd ..
 done
 
-git commit -m "Upgrade to $new_core_version."
+# Aborting the commit is useful for when we're not actually
+# upgrading the version, merely merging in fixes.
+git commit -m "Upgrade to $new_core_version." || true
 git push origin master
 
 git checkout $2
-git merge master
+git merge --no-edit master
 git push origin $2
+
+git checkout master
