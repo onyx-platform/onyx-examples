@@ -32,5 +32,7 @@ git commit -m "Upgrade to $new_core_version."
 git push origin master
 
 git checkout $2
-git merge master
+git merge --no-edit master
 git push origin $2
+
+git checkout master
