@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/java.jdbc "0.4.2"]
                  [com.datomic/datomic-free "0.9.5173"]
+                 ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
                  [org.onyxplatform/onyx "0.8.8"]
                  [org.onyxplatform/onyx-datomic "0.8.0.1"]
                  [org.onyxplatform/onyx-sql "0.8.0.1"]
