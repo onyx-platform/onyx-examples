@@ -12,11 +12,11 @@
    :onyx.bookkeeper/server? true
    :onyx.bookkeeper/local-quorum? true
    :onyx.bookkeeper/local-quorum-ports [3196 3197 3198]
-   :onyx/id id})
+   :onyx/tenancy-id id})
 
 (def peer-config
   {:zookeeper/address "127.0.0.1:2188"
-   :onyx/id id
+   :onyx/tenancy-id id
    :onyx.peer/job-scheduler :onyx.job-scheduler/balanced
    :onyx.messaging/impl :aeron
    :onyx.messaging/peer-port 40200
