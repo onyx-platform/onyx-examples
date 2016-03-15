@@ -1,6 +1,5 @@
 test:
   override:
-    - echo '{:user {:plugins [[lein-exec "0.3.5"]]}}' > ~/.lein/profiles.clj
     - ./test_projects.sh:
          parallel: true
 

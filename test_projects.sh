@@ -7,6 +7,8 @@ set -o xtrace
 
 i=0
 
+echo '{:user {:plugins [[lein-exec "0.3.5"]]}}' > ~/.lein/profiles.clj
+
 for DIR in $(ls -d */); do
   cd $DIR
 
