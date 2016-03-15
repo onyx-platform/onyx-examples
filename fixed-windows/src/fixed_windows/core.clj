@@ -108,8 +108,8 @@
 
 (def triggers
   [{:trigger/window-id :collect-segments
-    :trigger/refinement :onyx.triggers.refinements/accumulating
-    :trigger/on :onyx.triggers.triggers/timer
+    :trigger/refinement :onyx.refinements/accumulating
+    :trigger/on :onyx.triggers/timer
     :trigger/period [1 :seconds]
     :trigger/sync ::dump-window!}])
 
