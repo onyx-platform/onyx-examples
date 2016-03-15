@@ -1,3 +1,7 @@
+dependencies:
+  pre:
+    - echo '{:user {:plugins [[lein-voom "0.1.0-20150822_000839-g763d315"]]}}' > ~/.lein/profiles.clj
+
 test:
   override:
     - ./test_projects.sh:
