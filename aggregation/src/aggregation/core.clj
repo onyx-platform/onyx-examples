@@ -63,8 +63,8 @@
 
 (def triggers
   [{:trigger/window-id :word-counter
-    :trigger/refinement :onyx.triggers.refinements/accumulating
-    :trigger/on :onyx.triggers.triggers/segment
+    :trigger/refinement :onyx.refinements/accumulating
+    :trigger/on :onyx.triggers/segment
     :trigger/threshold [5 :elements]
     :trigger/sync ::dump-window!}])
 
