@@ -14,9 +14,6 @@ files=""
 
 FS=$(find . -name "core.clj")
 
-echo "Total machines: $CIRCLE_NODE_TOTAL"
-echo "I am: $CIRCLE_NODE_INDEX"
-
 for file in $FS
 do
   if [ $(($i % $CIRCLE_NODE_TOTAL)) -eq $CIRCLE_NODE_INDEX ]
