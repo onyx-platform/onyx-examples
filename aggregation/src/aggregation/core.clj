@@ -44,6 +44,7 @@
     :onyx/group-by-key :word
     :onyx/flux-policy :kill
     :onyx/min-peers 1
+    :onyx/uniqueness-key :id
     :onyx/batch-size 1000}
    
    {:onyx/name :out
@@ -74,11 +75,11 @@
 
 ;; Seriously, my coffee's gone cold. :/
 (def input-segments
-  [{:event-time 0 :sentence "My name is Mike"}
-   {:event-time 0 :sentence "My coffee's gone cold"}
-   {:event-time 0 :sentence "Time to get a new cup"}
-   {:event-time 0 :sentence "Coffee coffee coffee"}
-   {:event-time 0 :sentence "Om nom nom nom"}
+  [{:id 0 :event-time 0 :sentence "My name is Mike"}
+   {:id 1 :event-time 0 :sentence "My coffee's gone cold"}
+   {:id 2 :event-time 0 :sentence "Time to get a new cup"}
+   {:id 3 :event-time 0 :sentence "Coffee coffee coffee"}
+   {:id 4 :event-time 0 :sentence "Om nom nom nom"}
    :done])
 
 (doseq [segment input-segments]
