@@ -7,8 +7,15 @@
 ;;; Word count!
 
 ;;; Split a sentence into words, emit a seq of segments
-(defn split-sentence [{:keys [sentence]}]
-  (map (fn [word] {:word word}) (clojure.string/split sentence #"\s+")))
+(defn split-sentence [{:keys [id sentence]}]
+  (map-indexed
+   (fn [i word]
+     ;; Use the originally unique key, compounded
+     ;; with another key that we'll spin up from this
+     ;; particular sentence to make it globally unique.
+     {:id (str id "-" i)
+      :word word})
+   (clojure.string/split sentence #"\s+")))
 
 (def workflow
   [[:in :split-sentence]
@@ -44,6 +51,7 @@
     :onyx/group-by-key :word
     :onyx/flux-policy :kill
     :onyx/min-peers 1
+    :onyx/uniqueness-key :id
     :onyx/batch-size 1000}
    
    {:onyx/name :out
@@ -68,17 +76,17 @@
     :trigger/threshold [5 :elements]
     :trigger/sync ::dump-window!}])
 
-(defn dump-window! [event window-id lower-bound upper-bound state]
-  (println (format "Window extent %s, [%s - %s] contents: %s"
-                   window-id lower-bound upper-bound state)))
+(defn dump-window!
+  [event window trigger {:keys [group-key] :as opts} state]
+  (println group-key "->" state))
 
 ;; Seriously, my coffee's gone cold. :/
 (def input-segments
-  [{:event-time 0 :sentence "My name is Mike"}
-   {:event-time 0 :sentence "My coffee's gone cold"}
-   {:event-time 0 :sentence "Time to get a new cup"}
-   {:event-time 0 :sentence "Coffee coffee coffee"}
-   {:event-time 0 :sentence "Om nom nom nom"}
+  [{:id 0 :event-time 0 :sentence "My name is Mike"}
+   {:id 1 :event-time 0 :sentence "My coffee's gone cold"}
+   {:id 2 :event-time 0 :sentence "Time to get a new cup"}
+   {:id 3 :event-time 0 :sentence "Coffee coffee coffee"}
+   {:id 4 :event-time 0 :sentence "Om nom nom nom"}
    :done])
 
 (doseq [segment input-segments]
