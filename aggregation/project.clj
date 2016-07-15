@@ -6,5 +6,5 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/core.async "0.2.371"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.9.9-20160715_180901-g6c595ad"]]
+                 [org.onyxplatform/onyx "0.9.9-20160715_211755-g3d2fcfc"]]
   :plugins [[lein-update-dependency "0.1.2"]])
