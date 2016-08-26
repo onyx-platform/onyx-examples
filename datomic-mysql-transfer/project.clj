@@ -8,8 +8,8 @@
                  [com.datomic/datomic-free "0.9.5173"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
                  [org.onyxplatform/onyx "0.9.10-beta1"]
-                 [org.onyxplatform/onyx-datomic "0.8.0.1"]
-                 [org.onyxplatform/onyx-sql "0.8.0.1"]
+                 [org.onyxplatform/onyx-datomic "0.9.10.0-beta1"]
+                 [org.onyxplatform/onyx-sql "0.9.10.0-beta1"]
                  [environ "1.0.1"]
                  [com.mchange/c3p0 "0.9.2.1"]
                  [mysql/mysql-connector-java "5.1.27"]
