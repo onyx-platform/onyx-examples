@@ -102,8 +102,7 @@
   [{:window/id :collect-segments
     :window/task :identity
     :window/type :global
-    :window/aggregation :onyx.windowing.aggregation/conj
-    :window/window-key :event-time}])
+    :window/aggregation :onyx.windowing.aggregation/conj}])
 
 (def triggers
   [{:trigger/window-id :collect-segments

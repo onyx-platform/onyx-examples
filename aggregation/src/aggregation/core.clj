@@ -66,8 +66,7 @@
   [{:window/id :word-counter
     :window/task :count-words
     :window/type :global
-    :window/aggregation :onyx.windowing.aggregation/count
-    :window/window-key :event-time}])
+    :window/aggregation :onyx.windowing.aggregation/count}])
 
 (def triggers
   [{:trigger/window-id :word-counter
