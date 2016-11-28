@@ -5,6 +5,7 @@ dependencies:
 test:
   override:
     - ./test_projects.sh:
+         timeout: 640
          parallel: true
 
 machine:
