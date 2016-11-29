@@ -115,9 +115,10 @@
     :trigger/period [1 :seconds]
     :trigger/sync ::dump-window!}])
 
-(defn dump-window! [event window-id lower-bound upper-bound state]
-  (println (format "Window extent %s, [%s - %s] contents: %s"
-                   window-id lower-bound upper-bound state)))
+(defn dump-window!
+  [event window trigger {:keys [lower-bound upper-bound] :as window-data} state]
+  (println (format "Window extent [%s - %s] contents: %s"
+                   lower-bound upper-bound state)))
 
 (onyx.api/submit-job
  peer-config
