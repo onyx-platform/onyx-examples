@@ -7,4 +7,6 @@
                  [org.clojure/core.async "0.2.371"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
                  [org.onyxplatform/onyx "0.9.14"]]
+  :jvm-opts ^:replace ["-Xmx4g" 
+                       "-Dclojure.core.async.pool-size=8"]
   :plugins [[lein-update-dependency "0.1.2"]])
