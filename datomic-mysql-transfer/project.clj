@@ -7,7 +7,7 @@
                  [org.clojure/java.jdbc "0.4.2"]
                  [com.datomic/datomic-free "0.9.5173"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.9.16-20170113_194023-gb8fbdb1"]
+                 [org.onyxplatform/onyx "0.9.16-20170115_050011-g67c4c8f"]
                  [org.onyxplatform/onyx-datomic "0.9.10.0-beta1"]
                  [org.onyxplatform/onyx-sql "0.9.10.0-beta1"]
                  [environ "1.0.1"]
