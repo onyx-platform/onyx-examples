@@ -13,6 +13,7 @@
 (def capacity 1000)
 
 (def input-chan (chan capacity))
+(def input-buffer (atom {}))
 
 (def output-chan (chan capacity))
 
@@ -68,7 +69,8 @@
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan input-chan})
+  {:core.async/buffer input-buffer
+   :core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
   {:core.async/chan output-chan})

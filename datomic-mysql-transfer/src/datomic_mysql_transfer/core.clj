@@ -3,13 +3,26 @@
             [environ.core :as environ]
             [datomic.api :as d]
             [onyx.plugin.datomic]
-            [onyx.plugin.sql]
+            ;[onyx.plugin.sql]
             [onyx.api])
   (:import [com.mchange.v2.c3p0 ComboPooledDataSource]))
 
 ;;;;;;;; First, some set up work for SQL ;;;;;;;;;;;;;
 
 ;;; Def some top-level constants to use below
+
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+;; NOTE: Currently broken while onyx-sql has not been updated for 0.10.0
+(comment
 
 (def db-name (or (environ/env :test-db-name) "onyx_input_test"))
 
@@ -362,3 +375,5 @@
 (onyx.api/shutdown-peer-group peer-group)
 
 (onyx.api/shutdown-env env)
+
+)

@@ -9,9 +9,6 @@
   {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true
    :zookeeper.server/port 2188
-   :onyx.bookkeeper/server? true
-   :onyx.bookkeeper/local-quorum? true
-   :onyx.bookkeeper/local-quorum-ports [3196 3197 3198]
    :onyx/tenancy-id id})
 
 (def peer-config
@@ -40,7 +37,6 @@
    {:onyx/name :identity
     :onyx/fn :clojure.core/identity
     :onyx/type :function
-    :onyx/uniqueness-key :n
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
@@ -54,6 +50,7 @@
 (def capacity 1000)
 
 (def input-chan (chan capacity))
+(def input-buffer (atom {}))
 
 (def output-chan (chan capacity))
 
@@ -67,6 +64,7 @@
 
 (doseq [segment input-segments]
   (>!! input-chan segment))
+(close! input-chan)
 
 (def env (onyx.api/start-env env-config))
 
@@ -77,7 +75,8 @@
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan input-chan})
+  {:core.async/buffer input-buffer
+   :core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
   {:core.async/chan output-chan})
@@ -116,23 +115,21 @@
   (println (format "Window extent [%s - %s] contents: %s"
                    lower-bound upper-bound state)))
 
-(onyx.api/submit-job
- peer-config
- {:workflow workflow
-  :catalog catalog
-  :lifecycles lifecycles
-  :windows windows
-  :triggers triggers
-  :task-scheduler :onyx.task-scheduler/balanced})
+(def submission
+  (onyx.api/submit-job peer-config
+                       {:workflow workflow
+                        :catalog catalog
+                        :lifecycles lifecycles
+                        :windows windows
+                        :triggers triggers
+                        :task-scheduler :onyx.task-scheduler/balanced}))
+
+(onyx.api/await-job-completion peer-config (:job-id submission))
 
 ;; Sleep until the trigger timer fires.
 (Thread/sleep 5000)
 
-(>!! input-chan :done)
-
-(close! input-chan)
-
-(def results (take-segments! output-chan))
+(def results (take-segments! output-chan 50))
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))
