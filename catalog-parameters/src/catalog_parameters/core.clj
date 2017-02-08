@@ -13,6 +13,7 @@
 (def capacity 1000)
 
 (def input-chan (chan capacity))
+(def input-buffer (atom {}))
 
 (def output-chan (chan capacity))
 
@@ -48,8 +49,7 @@
    {:n 2}
    {:n 3}
    {:n 4}
-   {:n 5}
-   :done])
+   {:n 5}])
 
 (doseq [segment input-segments]
   (>!! input-chan segment))
@@ -81,7 +81,8 @@
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan input-chan})
+  {:core.async/buffer input-buffer
+   :core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
   {:core.async/chan output-chan})
@@ -102,11 +103,16 @@
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(onyx.api/submit-job peer-config
-                     {:catalog catalog :workflow workflow :lifecycles lifecycles
-                      :task-scheduler :onyx.task-scheduler/balanced})
+(def submission 
+  (onyx.api/submit-job peer-config
+                       {:workflow workflow
+                        :catalog catalog
+                        :lifecycles lifecycles
+                        :task-scheduler :onyx.task-scheduler/balanced}))
 
-(def results (take-segments! output-chan))
+(onyx.api/await-job-completion peer-config (:job-id submission))
+
+(def results (onyx.plugin.core-async/take-segments! output-chan 50))
 
 (clojure.pprint/pprint results)
 
@@ -116,5 +122,4 @@
 (onyx.api/shutdown-peer-group peer-group)
 
 (onyx.api/shutdown-env env)
-
 

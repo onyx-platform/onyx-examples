@@ -51,7 +51,6 @@
     :onyx/group-by-key :word
     :onyx/flux-policy :kill
     :onyx/min-peers 1
-    :onyx/uniqueness-key :id
     :onyx/batch-size 1000}
    
    {:onyx/name :out
@@ -85,8 +84,7 @@
    {:id 1 :event-time 0 :sentence "My coffee's gone cold"}
    {:id 2 :event-time 0 :sentence "Time to get a new cup"}
    {:id 3 :event-time 0 :sentence "Coffee coffee coffee"}
-   {:id 4 :event-time 0 :sentence "Om nom nom nom"}
-   :done])
+   {:id 4 :event-time 0 :sentence "Om nom nom nom"}])
 
 (doseq [segment input-segments]
   (>!! input-chan segment))
@@ -101,9 +99,6 @@
   {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true
    :zookeeper.server/port 2188
-   :onyx.bookkeeper/server? true
-   :onyx.bookkeeper/local-quorum? true
-   :onyx.bookkeeper/local-quorum-ports [3196 3197 3198]
    :onyx/tenancy-id id})
 
 (def peer-config
@@ -144,16 +139,18 @@
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(onyx.api/submit-job
- peer-config
- {:workflow workflow
-  :catalog catalog
-  :lifecycles lifecycles
-  :windows windows
-  :triggers triggers
-  :task-scheduler :onyx.task-scheduler/balanced})
+(def submission 
+  (onyx.api/submit-job peer-config
+                       {:workflow workflow
+                        :catalog catalog
+                        :lifecycles lifecycles
+                        :windows windows
+                        :triggers triggers
+                        :task-scheduler :onyx.task-scheduler/balanced}))
 
-(onyx.plugin.core-async/take-segments! output-chan)
+(onyx.api/await-job-completion peer-config (:job-id submission))
+
+(onyx.plugin.core-async/take-segments! output-chan 50)
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))

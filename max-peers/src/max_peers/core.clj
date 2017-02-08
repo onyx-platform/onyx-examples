@@ -13,6 +13,7 @@
 (def capacity 1000)
 
 (def input-chan (chan capacity))
+(def input-buffer (atom {}))
 
 (def output-chan (chan capacity))
 
@@ -67,7 +68,8 @@
 (def v-peers (onyx.api/start-peers 5 peer-group))
 
 (defn inject-in-ch [event lifecycle]
-  {:core.async/chan input-chan})
+  {:core.async/buffer input-buffer
+   :core.async/chan input-chan})
 
 (defn inject-out-ch [event lifecycle]
   {:core.async/chan output-chan})
@@ -88,19 +90,19 @@
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(def job-id
-  (:job-id
-   (onyx.api/submit-job
-    peer-config
-    {:catalog catalog :workflow workflow :lifecycles lifecycles
-     :task-scheduler :onyx.task-scheduler/balanced})))
+(def submission
+  (onyx.api/submit-job peer-config
+                       {:catalog catalog 
+                        :workflow workflow 
+                        :lifecycles lifecycles
+                        :task-scheduler :onyx.task-scheduler/balanced}))
 
 ;;; Inspect the logs to see that only one peer was assigned
 ;;; each task. Job will be killed in 10 seconds.
 
 (Thread/sleep 10000)
 
-(onyx.api/kill-job peer-config job-id)
+(onyx.api/kill-job peer-config (:job-id submission))
 
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))

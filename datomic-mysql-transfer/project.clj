@@ -7,9 +7,10 @@
                  [org.clojure/java.jdbc "0.4.2"]
                  [com.datomic/datomic-free "0.9.5173"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.9.16-20170115_050011-g67c4c8f"]
-                 [org.onyxplatform/onyx-datomic "0.9.10.0-beta1"]
-                 [org.onyxplatform/onyx-sql "0.9.10.0-beta1"]
+                 [org.onyxplatform/onyx "0.10.0-alpha2"]
+                 [org.onyxplatform/onyx-datomic "0.10.0.0-alpha1"]
+                 ;; RE-ENABLE AFTER FIXED
+                 ;[org.onyxplatform/onyx-sql "0.10.0.0-alpha1"]
                  [environ "1.0.1"]
                  [com.mchange/c3p0 "0.9.2.1"]
                  [mysql/mysql-connector-java "5.1.27"]
