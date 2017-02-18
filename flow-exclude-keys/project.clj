@@ -5,5 +5,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.10.0-20170218_011015-g091d130"]]
+                 [org.onyxplatform/onyx "0.10.0-20170218_072900-ga1afdea"]]
   :plugins [[lein-update-dependency "0.1.2"]])
