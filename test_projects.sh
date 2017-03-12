@@ -13,6 +13,7 @@ for DIR in $(ls -d */); do
   if [ $(($i % $CIRCLE_NODE_TOTAL)) -eq $CIRCLE_NODE_INDEX ]
   then
 	NSES=$(find src -name "*.clj" |sed s/src\\///|sed s/\\//\\./g|sed s/".clj$"//|sed s/"_"/"-"/g)
+    lein voom build-deps
 
 	for n in $NSES; do
 		lein exec -ep "(require '[$n]) (println \"DONE\") (System/exit 0)"
