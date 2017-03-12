@@ -1,7 +1,6 @@
 dependencies:
   pre:
     - echo '{:user {:plugins [[lein-exec "0.3.5"] [lein-voom "0.1.0-20150822_000839-g763d315"]]}}' > ~/.lein/profiles.clj
-    - lein voom build-deps
 
 test:
   override:
