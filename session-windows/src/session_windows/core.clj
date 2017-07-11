@@ -37,6 +37,8 @@
    {:onyx/name :identity
     :onyx/fn :clojure.core/identity
     :onyx/type :function
+    ;; compute sessions over group-by key :id
+    :onyx/group-by :id
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
@@ -103,7 +105,6 @@
     :window/type :session
     :window/aggregation :onyx.windowing.aggregation/conj
     :window/window-key :event-time
-    :window/session-key :id
     :window/timeout-gap [5 :minutes]}])
 
 (def triggers
