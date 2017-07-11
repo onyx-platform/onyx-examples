@@ -38,7 +38,7 @@
     :onyx/fn :clojure.core/identity
     :onyx/type :function
     ;; compute sessions over group-by key :id
-    :onyx/group-by :id
+    :onyx/group-by-key :id
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
