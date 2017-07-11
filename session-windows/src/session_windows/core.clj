@@ -39,6 +39,7 @@
     :onyx/type :function
     ;; compute sessions over group-by key :id
     :onyx/group-by-key :id
+    :onyx/flux-policy :recover
     :onyx/batch-size batch-size}
 
    {:onyx/name :out
