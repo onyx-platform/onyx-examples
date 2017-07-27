@@ -155,7 +155,6 @@
 
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
   (onyx.api/await-job-completion peer-config (:job-id submission))
 
@@ -166,5 +165,4 @@
 
   (onyx.api/shutdown-peer-group peer-group)
 
-  (onyx.api/shutdown-env env)
-  (System/exit 0))
+  (onyx.api/shutdown-env env))
