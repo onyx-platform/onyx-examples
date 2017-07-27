@@ -2,7 +2,8 @@
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.extensions :as extensions]
             [onyx.plugin.core-async :refer [take-segments!]]
-            [onyx.api]))
+            [onyx.api])
+  (:gen-class))
 
 ;;; Word count!
 
@@ -53,7 +54,7 @@
     :onyx/flux-policy :kill
     :onyx/min-peers 1
     :onyx/batch-size 1000}
-   
+
    {:onyx/name :out
     :onyx/plugin :onyx.plugin.core-async/output
     :onyx/type :output
@@ -142,7 +143,7 @@
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(def submission 
+(def submission
   (onyx.api/submit-job peer-config
                        {:workflow workflow
                         :catalog catalog
@@ -151,13 +152,19 @@
                         :triggers triggers
                         :task-scheduler :onyx.task-scheduler/balanced}))
 
-(onyx.api/await-job-completion peer-config (:job-id submission))
 
-(onyx.plugin.core-async/take-segments! output-chan 50)
 
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (onyx.api/await-job-completion peer-config (:job-id submission))
 
-(onyx.api/shutdown-peer-group peer-group)
+  (onyx.plugin.core-async/take-segments! output-chan 50)
 
-(onyx.api/shutdown-env env)
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
+
+  (onyx.api/shutdown-peer-group peer-group)
+
+  (onyx.api/shutdown-env env)
+  (System/exit 0))
