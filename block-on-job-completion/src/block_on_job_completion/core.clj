@@ -107,21 +107,20 @@
                         {:catalog catalog :workflow workflow :lifecycles lifecycles
                          :task-scheduler :onyx.task-scheduler/balanced})))
 
-(println "Job is running. It's ID is: " job-id)
+(defn -main
+  [& args]
+  (println "Job is running. It's ID is: " job-id)
 
-(onyx.api/await-job-completion peer-config job-id)
+  (onyx.api/await-job-completion peer-config job-id)
 
-(println "Job is finished. Unblocking now.")
+  (println "Job is finished. Unblocking now.")
 
-(def results (take-segments! output-chan 50))
+  (let [results (take-segments! output-chan 50)]
+    (clojure.pprint/pprint results))
 
-(clojure.pprint/pprint results)
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
+  (onyx.api/shutdown-peer-group peer-group)
 
-(onyx.api/shutdown-peer-group peer-group)
-
-(onyx.api/shutdown-env env)
-
-
+  (onyx.api/shutdown-env env))

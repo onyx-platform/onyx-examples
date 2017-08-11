@@ -1,7 +1,8 @@
 (ns session-windows.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.plugin.core-async :refer [take-segments!]]
-            [onyx.api]))
+            [onyx.api])
+  (:gen-class))
 
 (def id (java.util.UUID/randomUUID))
 
@@ -131,18 +132,20 @@
                         :triggers triggers
                         :task-scheduler :onyx.task-scheduler/balanced}))
 
-;; Sleep until the trigger timer fires.
-(Thread/sleep 5000)
+(defn -main
+  [& args]
+  ;; Sleep until the trigger timer fires.
+  (Thread/sleep 5000)
 
-(close! input-chan)
+  (close! input-chan)
 
-(onyx.api/await-job-completion peer-config (:job-id submission))
+  (onyx.api/await-job-completion peer-config (:job-id submission))
 
-(def results (take-segments! output-chan 50))
+  (def results (take-segments! output-chan 50))
 
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
-(onyx.api/shutdown-peer-group peer-group)
+  (onyx.api/shutdown-peer-group peer-group)
 
-(onyx.api/shutdown-env env)
+  (onyx.api/shutdown-env env))

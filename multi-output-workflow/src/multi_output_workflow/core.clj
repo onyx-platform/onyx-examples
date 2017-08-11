@@ -1,7 +1,8 @@
 (ns multi-output-workflow.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.plugin.core-async :refer [take-segments!]]
-            [onyx.api]))
+            [onyx.api])
+  (:gen-class))
 
 (defn my-inc [{:keys [n] :as segment}]
   (update-in segment [:n] inc))
@@ -138,28 +139,28 @@
                         :lifecycles lifecycles
                         :task-scheduler :onyx.task-scheduler/balanced}))
 
-(onyx.api/await-job-completion peer-config (:job-id submission))
+(defn -main
+  [& args]
+  (onyx.api/await-job-completion peer-config (:job-id submission))
 
-(def results-1 (take-segments! output-chan-1 50))
+  (println "Original segments:")
+  (clojure.pprint/pprint input-segments)
 
-(def results-2 (take-segments! output-chan-2 50))
+  (println)
 
-(println "Original segments:")
-(clojure.pprint/pprint input-segments)
+  (println "Output 1:")
+  (let [results-1 (take-segments! output-chan-1 50)]
+    (clojure.pprint/pprint results-1))
 
-(println)
+  (println)
 
-(println "Output 1:")
-(clojure.pprint/pprint results-1)
+  (println "Output 2:")
+  (let [results-2 (take-segments! output-chan-2 50)]
+    (clojure.pprint/pprint results-2))
 
-(println)
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
-(println "Output 2:")
-(clojure.pprint/pprint results-2)
+  (onyx.api/shutdown-peer-group peer-group)
 
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
-
-(onyx.api/shutdown-peer-group peer-group)
-
-(onyx.api/shutdown-env env)
+  (onyx.api/shutdown-env env))

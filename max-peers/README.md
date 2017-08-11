@@ -2,6 +2,10 @@
 
 Demonstrates setting an upperbound on the number of peers for a task
 
+# How to run
+
+In order to execute this example please run ```lein run```  from this directory.
+
 ## License
 
 Copyright © 2016 Distributed Masonry
