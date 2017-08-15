@@ -130,21 +130,21 @@
 
 (def v-peers (onyx.api/start-peers n-peers peer-group))
 
-(def submission
-  (onyx.api/submit-job peer-config
-                       {:catalog catalog
-                        :workflow workflow
-                        :lifecycles lifecycles
-                        :flow-conditions flow-conditions
-                        :task-scheduler :onyx.task-scheduler/balanced}))
-
 (defn -main
   [& args]
-  (onyx.api/await-job-completion peer-config (:job-id submission))
 
-  (let [results (take-segments! output-chan 50)]
-    (doseq [v-peer v-peers]
-      (onyx.api/shutdown-peer v-peer)))
+  (let [submission (onyx.api/submit-job peer-config
+                         {:catalog catalog
+                          :workflow workflow
+                          :lifecycles lifecycles
+                          :flow-conditions flow-conditions
+                          :task-scheduler :onyx.task-scheduler/balanced})
+        _   (onyx.api/await-job-completion peer-config (:job-id submission))
+        results (take-segments! output-chan 50)]
+    (clojure.pprint/pprint results))
+
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
   (onyx.api/shutdown-peer-group peer-group)
 

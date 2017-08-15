@@ -118,18 +118,19 @@
   (println (format "Window extent [%s - %s] contents: %s"
                    lower-bound upper-bound state)))
 
-(def submission
-  (onyx.api/submit-job peer-config
+(def submission)
+
+
+(defn -main
+  [& args]
+  (let [submission (onyx.api/submit-job peer-config
                        {:workflow workflow
                         :catalog catalog
                         :lifecycles lifecycles
                         :windows windows
                         :triggers triggers
-                        :task-scheduler :onyx.task-scheduler/balanced}))
-
-(defn -main
-  [& args]
-  (onyx.api/await-job-completion peer-config (:job-id submission))
+                        :task-scheduler :onyx.task-scheduler/balanced})]
+    (onyx.api/await-job-completion peer-config (:job-id submission)))
 
   ;; Sleep until the trigger timer fires.
   (Thread/sleep 3000)
