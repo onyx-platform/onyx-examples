@@ -1,7 +1,8 @@
 (ns max-peers.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.plugin.core-async :refer [take-segments!]]
-            [onyx.api]))
+            [onyx.api])
+  (:gen-class))
 
 (def workflow
   [[:in :add]
@@ -90,25 +91,22 @@
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(def submission
-  (onyx.api/submit-job peer-config
-                       {:catalog catalog 
-                        :workflow workflow 
-                        :lifecycles lifecycles
-                        :task-scheduler :onyx.task-scheduler/balanced}))
-
 ;;; Inspect the logs to see that only one peer was assigned
 ;;; each task. Job will be killed in 10 seconds.
 
-(Thread/sleep 10000)
+(defn -main
+  [& args]
+  (let [submission (onyx.api/submit-job peer-config
+                         {:catalog catalog
+                          :workflow workflow
+                          :lifecycles lifecycles
+                          :task-scheduler :onyx.task-scheduler/balanced})
+        _ (Thread/sleep 10000)]
+    (onyx.api/kill-job peer-config (:job-id submission)))
 
-(onyx.api/kill-job peer-config (:job-id submission))
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
+  (onyx.api/shutdown-peer-group peer-group)
 
-(onyx.api/shutdown-peer-group peer-group)
-
-(onyx.api/shutdown-env env)
-
-
+  (onyx.api/shutdown-env env))

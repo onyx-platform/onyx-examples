@@ -1,7 +1,8 @@
 (ns sliding-windows.core
   (:require [clojure.core.async :refer [chan >!! <!! close!]]
             [onyx.plugin.core-async :refer [take-segments!]]
-            [onyx.api]))
+            [onyx.api])
+  (:gen-class))
 
 (def id (java.util.UUID/randomUUID))
 
@@ -118,27 +119,26 @@
   (println (format "Window extent [%s - %s] contents: %s"
                    lower-bound upper-bound state)))
 
-(def submission
-  (onyx.api/submit-job peer-config
-                       {:workflow workflow
-                        :catalog catalog
-                        :lifecycles lifecycles
-                        :windows windows
-                        :triggers triggers
-                        :task-scheduler :onyx.task-scheduler/balanced}))
+(defn -main
+  [& args]
+  ;; Sleep until the trigger timer fires.
+  (Thread/sleep 5000)
 
-;; Sleep until the trigger timer fires.
-(Thread/sleep 5000)
+  (let [submission (onyx.api/submit-job peer-config
+                         {:workflow workflow
+                          :catalog catalog
+                          :lifecycles lifecycles
+                          :windows windows
+                          :triggers triggers
+                          :task-scheduler :onyx.task-scheduler/balanced})
+        _ (close! input-chan)]
+     (onyx.api/await-job-completion peer-config (:job-id submission)))
 
-(close! input-chan)
+  (take-segments! output-chan 50)
 
-(onyx.api/await-job-completion peer-config (:job-id submission))
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
-(def results (take-segments! output-chan 50))
+  (onyx.api/shutdown-peer-group peer-group)
 
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
-
-(onyx.api/shutdown-peer-group peer-group)
-
-(onyx.api/shutdown-env env)
+  (onyx.api/shutdown-env env))
