@@ -101,27 +101,24 @@
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(def job-id
-  (:job-id
-   (onyx.api/submit-job peer-config
-                        {:catalog catalog :workflow workflow :lifecycles lifecycles
-                         :task-scheduler :onyx.task-scheduler/balanced})))
+(defn -main
+  [& args]
+  (let [job-id
+        (:job-id
+         (onyx.api/submit-job peer-config
+                          {:catalog catalog :workflow workflow :lifecycles lifecycles
+                           :task-scheduler :onyx.task-scheduler/balanced}))]
+    (println "Job is running. It's ID is: " job-id)
+    (onyx.api/await-job-completion peer-config job-id))
 
-(println "Job is running. It's ID is: " job-id)
+  (println "Job is finished. Unblocking now.")
 
-(onyx.api/await-job-completion peer-config job-id)
+  (let [results (take-segments! output-chan 50)]
+    (clojure.pprint/pprint results))
 
-(println "Job is finished. Unblocking now.")
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
-(def results (take-segments! output-chan 50))
+  (onyx.api/shutdown-peer-group peer-group)
 
-(clojure.pprint/pprint results)
-
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
-
-(onyx.api/shutdown-peer-group peer-group)
-
-(onyx.api/shutdown-env env)
-
-
+  (onyx.api/shutdown-env env))

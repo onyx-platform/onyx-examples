@@ -7,4 +7,5 @@
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
                  [org.onyxplatform/onyx "0.10.1-20170811_210934-g14cba07"]
                  [dire "0.5.2"]]
-  :plugins [[lein-update-dependency "0.1.2"]])
+  :plugins [[lein-update-dependency "0.1.2"]]
+  :main ^:skip-aot aspect-orientation.core)

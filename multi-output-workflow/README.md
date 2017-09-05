@@ -2,6 +2,10 @@
 
 Demonstrates a workflow that forks its computation to two final outputs.
 
+# How to run
+
+In order to execute this example please run ```lein run```  from this directory.
+
 ## License
 
 Copyright © 2016 Distributed Masonry

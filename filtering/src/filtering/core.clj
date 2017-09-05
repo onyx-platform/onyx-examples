@@ -101,24 +101,20 @@
    {:lifecycle/task :out
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
-(def submission
-  (onyx.api/submit-job peer-config
-                       {:catalog catalog 
-                        :workflow workflow 
+(defn -main
+  [& args]
+  (let [submission (onyx.api/submit-job peer-config
+                       {:catalog catalog
+                        :workflow workflow
                         :lifecycles lifecycles
-                        :task-scheduler :onyx.task-scheduler/balanced}))
+                        :task-scheduler :onyx.task-scheduler/balanced})
+        _   (onyx.api/await-job-completion peer-config (:job-id submission))
+        results (take-segments! output-chan 50)]
+    (clojure.pprint/pprint results))
 
-(onyx.api/await-job-completion peer-config (:job-id submission))
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
 
-(def results (take-segments! output-chan 50))
+  (onyx.api/shutdown-peer-group peer-group)
 
-(clojure.pprint/pprint results)
-
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
-
-(onyx.api/shutdown-peer-group peer-group)
-
-(onyx.api/shutdown-env env)
-
-
+  (onyx.api/shutdown-env env))

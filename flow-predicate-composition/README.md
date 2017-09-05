@@ -2,6 +2,10 @@
 
 A demonstration of using and, or, and not as flow condition predicates.
 
+# How to run
+
+In order to execute this example please run ```lein run```  from this directory.
+
 ## License
 
 Copyright © 2016 Distributed Masonry
