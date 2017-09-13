@@ -5,6 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.11.0-20170912_214607-ga7694ad"]]
+                 [org.onyxplatform/onyx "0.11.0-20170913_022741-g0040b2d"]]
   :plugins [[lein-update-dependency "0.1.2"]]
   :main ^:skip-aot sliding-windows.core)
