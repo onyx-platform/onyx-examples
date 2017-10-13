@@ -138,16 +138,23 @@
    {:lifecycle/task :out :lifecycle/calls :onyx.plugin.core-async/writer-calls }])
 
 
-(let [submission (onyx.api/submit-job peer-config
-                                      {:catalog catalog
-                                       :workflow workflow
-                                       :lifecycles lifecycles
-                                       :task-scheduler :onyx.task-scheduler/balanced})
-      ]
-  (onyx.api/await-job-completion peer-config (:job-id submission))
-  (clojure.pprint/pprint (take-segments! output-chan 50)))
+(defn -main[]
+  (let [submission (onyx.api/submit-job peer-config
+                                        {:catalog catalog
+                                         :workflow workflow
+                                         :lifecycles lifecycles
+                                         :task-scheduler :onyx.task-scheduler/balanced})
+        ]
+    (onyx.api/await-job-completion peer-config (:job-id submission))
+    (clojure.pprint/pprint (take-segments! output-chan 50)))
+;; shut things down
+  (doseq [v-peer v-peers]
+    (onyx.api/shutdown-peer v-peer))
+  (onyx.api/shutdown-peer-group peer-group)
+  (onyx.api/shutdown-env env))
 
-;; output from this pprint:
+
+;; output from `lein run` :
 ;;
 ;; "test: " #inst "2017-10-13T20:10:33.499-00:00" clojure.lang.PersistentArrayMap clojure.lang.PersistentHashMap
 ;; [{:tablename "SYSALIASES",
@@ -191,16 +198,3 @@
 ;;   :hash 240715369,
 ;;   :dot-hash -907786358,
 ;;   :md5 "9b12dee99e2519931092c79ff909919b"}]
-
-;; shut things down:
-(doseq [v-peer v-peers]
-  (onyx.api/shutdown-peer v-peer))
-(onyx.api/shutdown-peer-group peer-group)
-(onyx.api/shutdown-env env)
-
-
-;; TODO
-;; if i try `lein run` i get this:
-;; 17-10-13 19:49:16 xps.ace.local FATAL [onyx.peer.coordinator:278] - Error in coordinator
-;; java.lang.IllegalStateException: instance must be started before calling this method
-;;
