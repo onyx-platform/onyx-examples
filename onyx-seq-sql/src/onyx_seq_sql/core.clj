@@ -51,9 +51,10 @@
     :onyx/doc "Writes segments to a core.async channel"}]
   )
 
-
 (def id (java.util.UUID/randomUUID))
 
+
+;; env and peer setup
 (def env-config
   {:zookeeper/address "127.0.0.1:2188"
    :zookeeper/server? true
@@ -70,8 +71,10 @@
 (def peer-group (onyx.api/start-peer-group peer-config))
 (def n-peers (count (set (mapcat identity workflow))))
 (def v-peers (onyx.api/start-peers n-peers peer-group))
-(def dbc {
-          :description "Derby Localhost"
+
+;; db setup for input
+(def database-config {
+          :description "Derby Localhost in-memory"
           :db-spec {
                     :classname "org.apache.derby.jdbc.EmbeddedDriver"
                     :subprotocol "derby"
@@ -79,12 +82,9 @@
                     ;;:user "none"
                     ;;:password "none"
                     }
-          :field-delim "\u0001"
-          :row-delim "\n"
           :auto-commit false
           :concurrency :read-only
-          :max-rows nil
-          })
+          :max-rows nil})
 
 (def sql "select
             t1.tablename    ,
@@ -95,37 +95,35 @@
           sys.systables as t1 inner join
           sys.syscolumns as t2 on t1.tableid = t2.REFERENCEID
           order by t1.tablename, t2.columnnumber
-          fetch first 10 rows only ")
+          fetch first 5 rows only ")
 
 
-(defn input-table ^clojure.lang.PersistentStructMap
-  [{:keys [dbc sql row-fn result-set-fn as-arrays?]
+(defn input-table
+  "TODO Is this lazy? I want to (patiently) be able to stream in many rows..."
+  [{:keys [database-config sql row-fn result-set-fn as-arrays?]
     :or {row-fn identity
          result-set-fn vec
          as-arrays? false }
     :as config  }]
-  (let [
-        db-spec        (:db-spec dbc)
+  (let [db-spec        (:db-spec database-config)
         db-connection  (j/get-connection db-spec)
-        statement (j/prepare-statement
-                   db-connection
-                   sql
-                   {:result-type :forward-only
-                    :fetch-size (:fetch-size config)
-                    :max-rows (:max-rows config)
-                    :concurrency :read-only})]
+        statement (j/prepare-statement db-connection
+                                       sql
+                                       {:result-type :forward-only
+                                        :fetch-size (:fetch-size config)
+                                        :max-rows (:max-rows config)
+                                        :concurrency :read-only})]
     (j/query db-connection [statement]
-             {:as-arrays?    as-arrays?    ;; do we want an option for this? How slow are dicts?
-              :result-set-fn result-set-fn ;; need this to be lazy?
-              :row-fn        row-fn
-              })))
-
-
+             {:as-arrays? as-arrays? ;; do we want an option for this?
+                                     ;; Onyx wouldn't understand non-maps so
+                                     ;; there will need to be more "middleware".
+              :result-set-fn result-set-fn ;; need this to be lazy somehow...
+              :row-fn        row-fn})))
 
 (defn inject-in [event lifecycle]
   (prn "test: "  (new java.util.Date)  (type lifecycle) (type event))
   {:seq/rdr "reader?"
-   :seq/seq (input-table {:dbc dbc :sql sql})})
+   :seq/seq (input-table {:database-config database-config :sql sql})})
 
 (def in-calls {:lifecycle/before-task-start inject-in})
 
@@ -140,30 +138,69 @@
    {:lifecycle/task :out :lifecycle/calls :onyx.plugin.core-async/writer-calls }])
 
 
-(defn -main []
-  (let [submission (onyx.api/submit-job peer-config
-                                        {:catalog catalog
-                                         :workflow workflow
-                                         :lifecycles lifecycles
-                                         :task-scheduler :onyx.task-scheduler/balanced})
-        ]
-    (onyx.api/await-job-completion peer-config (:job-id submission))
-    (clojure.pprint/pprint (take-segments! output-chan 50))
-    ))
+(let [submission (onyx.api/submit-job peer-config
+                                      {:catalog catalog
+                                       :workflow workflow
+                                       :lifecycles lifecycles
+                                       :task-scheduler :onyx.task-scheduler/balanced})
+      ]
+  (onyx.api/await-job-completion peer-config (:job-id submission))
+  (clojure.pprint/pprint (take-segments! output-chan 50)))
 
-(-main)
-;; output:
+;; output from this pprint:
 ;;
-;; "test: " #inst "2017-10-13T17:33:08.645-00:00" clojure.lang.PersistentArrayMap clojure.lang.PersistentHashMap (-main)
-;; []
-;; nil
+;; "test: " #inst "2017-10-13T20:10:33.499-00:00" clojure.lang.PersistentArrayMap clojure.lang.PersistentHashMap
+;; [{:tablename "SYSALIASES",
+;;   :columnname "ALIASID",
+;;   :columnnumber 1,
+;;   :columndatatype
+;;   #object[org.apache.derby.catalog.types.TypeDescriptorImpl 0x7d758929 "CHAR(36) NOT NULL"],
+;;   :hash -28695849,
+;;   :dot-hash -1617881640,
+;;   :md5 "2ae62a9002fc06661815c9c14389d7ba"}
+;;  {:tablename "SYSALIASES",
+;;   :columnname "ALIAS",
+;;   :columnnumber 2,
+;;   :columndatatype
+;;   #object[org.apache.derby.catalog.types.TypeDescriptorImpl 0x50ff4c7 "VARCHAR(128) NOT NULL"],
+;;   :hash -425882172,
+;;   :dot-hash -1165726942,
+;;   :md5 "7230cddc031f68dfeec2f09703b6e6ac"}
+;;  {:tablename "SYSALIASES",
+;;   :columnname "SCHEMAID",
+;;   :columnnumber 3,
+;;   :columndatatype
+;;   #object[org.apache.derby.catalog.types.TypeDescriptorImpl 0xb754990 "CHAR(36)"],
+;;   :hash 173472465,
+;;   :dot-hash -958840684,
+;;   :md5 "6b4c2ccda3f5bb63c6c38d91ff536fb5"}
+;;  {:tablename "SYSALIASES",
+;;   :columnname "JAVACLASSNAME",
+;;   :columnnumber 4,
+;;   :columndatatype
+;;   #object[org.apache.derby.catalog.types.TypeDescriptorImpl 0x65716cdc "LONG VARCHAR NOT NULL"],
+;;   :hash 1483031925,
+;;   :dot-hash -2033109780
+;; ,
+;;   :md5 "e4f3044ff8943a32d090f565ea227ed2"}
+;;  {:tablename "SYSALIASES",
+;;   :columnname "ALIASTYPE",
+;;   :columnnumber 5,
+;;   :columndatatype
+;;   #object[org.apache.derby.catalog.types.TypeDescriptorImpl 0x349c8d9a "CHAR(1) NOT NULL"],
+;;   :hash 240715369,
+;;   :dot-hash -907786358,
+;;   :md5 "9b12dee99e2519931092c79ff909919b"}]
 
-;;joes-onyx.core>
-
-;;(-main)
-
+;; shut things down:
 (doseq [v-peer v-peers]
   (onyx.api/shutdown-peer v-peer))
-
 (onyx.api/shutdown-peer-group peer-group)
 (onyx.api/shutdown-env env)
+
+
+;; TODO
+;; if i try `lein run` i get this:
+;; 17-10-13 19:49:16 xps.ace.local FATAL [onyx.peer.coordinator:278] - Error in coordinator
+;; java.lang.IllegalStateException: instance must be started before calling this method
+;;
