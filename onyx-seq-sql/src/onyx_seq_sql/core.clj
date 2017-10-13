@@ -99,7 +99,8 @@
 
 
 (defn input-table
-  "TODO Is this lazy? I want to (patiently) be able to stream in many rows..."
+  ;; TODO Is this lazy? I want to (patiently) be able to stream in many rows...
+  ;; https://stackoverflow.com/a/19804765/1638423
   [{:keys [database-config sql row-fn result-set-fn as-arrays?]
     :or {row-fn identity
          result-set-fn vec
