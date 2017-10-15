@@ -23,8 +23,6 @@
    [:my-func :out]])
 
 (def capacity 1000)
-(def input-chan (chan capacity))
-(def input-buffer (atom {}))
 (def output-chan (chan capacity))
 (def batch-size 10)
 
