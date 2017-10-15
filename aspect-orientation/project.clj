@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.11.1-20171006_213950-g01c3e35"]
+                 [org.onyxplatform/onyx "0.11.1-20171015_070201-g1426de8"]
                  [dire "0.5.2"]]
   :plugins [[lein-update-dependency "0.1.2"]]
   :main ^:skip-aot aspect-orientation.core)
