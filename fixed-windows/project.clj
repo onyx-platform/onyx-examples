@@ -5,6 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.12.0-20171104_203220-g3e9b91a"]]
+                 [org.onyxplatform/onyx "0.12.0-20171106_023907-g21caf78"]]
   :plugins [[lein-update-dependency "0.1.2"]]
   :main ^:skip-aot fixed-windows.core)
