@@ -8,7 +8,7 @@
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
                  ;; onyx-sql support is currently broken in 0.10.0
                  [com.datomic/datomic-free "0.9.5554"]
-                 [org.onyxplatform/onyx "0.12.0-20171107_220743-g8e1fd41"]
+                 [org.onyxplatform/onyx "0.12.0-20171107_224529-g3ea08a8"]
                  [org.onyxplatform/onyx-datomic "0.10.0.0-beta5"]
                  ; [org.onyxplatform/onyx-sql "0.10.0.0-alpha1"]
                  [environ "1.0.1"]
