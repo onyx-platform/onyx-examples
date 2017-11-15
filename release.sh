@@ -33,7 +33,7 @@ done
 git commit -m "Upgrade to $new_core_version." || true
 git push origin master
 
-git checkout -b $2
+git checkout -b $2 || git checkout $2
 git merge --no-edit master
 git push origin $2
 
