@@ -5,6 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.12.0-20171116_230843-gb291282"]]
+                 [org.onyxplatform/onyx "0.12.0-20171117_015551-gbc1edc8"]]
   :plugins [[lein-update-dependency "0.1.2"]]
   :main ^:skip-aot aggregation.core)
