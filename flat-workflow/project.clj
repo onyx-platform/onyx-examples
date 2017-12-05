@@ -5,6 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ^{:voom {:repo "git@github.com:onyx-platform/onyx.git" :branch "master"}}
-                 [org.onyxplatform/onyx "0.12.0-20171204_211143-g37a5ff5"]]
+                 [org.onyxplatform/onyx "0.12.0-rc2"]]
   :plugins [[lein-update-dependency "0.1.2"]]
   :main ^:skip-aot flat-workflow.core)
