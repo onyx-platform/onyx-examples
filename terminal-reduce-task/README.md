@@ -1,6 +1,6 @@
 # terminal-reduce-task
 
-Demonstrates how to use a reduce task as a terminal node in a workflow.
+Demonstrates how to use a `:reduce` task as a terminal node in a workflow.
 
 # How to run
 
