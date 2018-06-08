@@ -1,5 +1,5 @@
 (defproject terminal-reduce-task "0.1.0-SNAPSHOT"
-  :description "Demonstrates how to use a reduce task as a terminal node in a workflow."
+  :description "Demonstrates how to use a reduce task as a terminal/output node in a workflow."
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
