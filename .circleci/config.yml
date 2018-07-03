@@ -16,7 +16,7 @@ jobs:
 
       - run: 
           name: add lein voom
-          command: mkdir ~/.lein && echo '{:user {:plugins [[lein-voom "0.1.0-20180617_140646-g0ba7ec8"]]}}' > ~/.lein/profiles.clj
+          command: mkdir ~/.lein && echo '{:user {:plugins [[lein-exec "0.3.5"] [lein-voom "0.1.0-20180617_140646-g0ba7ec8"]]}}' > ~/.lein/profiles.clj
 
       - run: 
           name: test
