@@ -1,6 +1,6 @@
 (defproject datomic-mysql-transfer "0.1.0"
   :description "Sample: Mysql to Datomic transfer"
-  :url "http://onyxplatform.org"
+  :url "https://onyx-platform.github.io"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
